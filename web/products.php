@@ -1,5 +1,6 @@
 <?php
 require_once('header.php');
+require('../groups.php');
 ?>
 	<!--breadcrumbs-->
 	<div class="breadcrumbs">
@@ -14,20 +15,52 @@ require_once('header.php');
 	<!--products-->
 	<div class="products">	 
 		<div class="container">
+	<?php if ($admin) : ?>
+	<form method="post" enctype="multipart/form-data">
+		<div class="form-group">
+			<label for="nom_produit">Nom du produit</label>
+			<input type="text" class="form-control" name="nom_produit" placeholder="nom" size="49"></input>
+		</div>
+		<div class="form-group">
+			<label for="prix">prix</label>
+			<input type="text" class="form-control" name="prix" placeholder="0" maxlength="49"></input>
+		</div>
+		<div class="form-group">
+			<label for="image">Image</label>
+			<input type="file" class="form-control-file" name="image" accept="image/png" placeholder="img.png"></input>
+		</div>
+		<div class="form-group">
+			<label for="taille">Taille</label>
+			<input type="text" class="form-control" name="taille" placeholder="m" maxlength="9"></input>
+		<div class="form-group">
+		<div class="form-group">
+			<label for="description">Description</label>
+			<textarea name="description" class="form-control" placeholder="Description du produit" maxlength="149"></textarea>
+		</div>
+		<?php foreach ($groups as $group): ?>
+		<div class="form-check">
+			<input class="form-check-input" type="checkbox" name="group" value="<?=urlencode($group['name'])?>"></input>
+			<label class="form-check-label" for="group"><?=urlencode($group['name'])?></label>
+		</div>
+		<?php endforeach; ?>
+		<input type="submit" class="form-control btn btn-primary" value="Ajouter"/>
+	</form>
+	<?php endif; ?>
 			<div class="col-md-9 product-model-sec">
-				<div class="product-grids simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".5s">
+	<?php foreach ($products as $key => $product): ?>
+				<div class="product-grids <?php if (($key+1) % 3 == 2) echo 'product-grids-mdl'; ?> simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".5s">
 					<div class="new-top">
-						<a href="single.php"><img src="images/g1.jpg" class="img-responsive" alt=""/></a>
+						<a href="single.php?pid=<?=$product['id']?>"><img src="data:image/png;base64,<?=base64_encode($product['picture'])?>" class="img-responsive"/></a>
 						<div class="new-text">
 							<ul>
-								<li><a href="single.php">Quick View </a></li>
+								<li><a href="single.php?pid=<?=$product['id']?>">Quick View </a></li>
 								<li><input type="number" class="item_quantity" min="1" value="1"></li>
 								<li><a class="item_add" href=""> Add to cart</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="new-bottom">
-						<h5><a class="name" href="single.php">Girl Dress </a></h5>
+						<h5><a class="name" href="single.php?pid=<?=$product['id']?>"><?=htmlspecialchars($product['name'])?></a></h5>
 						<div class="rating">
 							<span class="on">☆</span>
 							<span class="on">☆</span>
@@ -36,219 +69,18 @@ require_once('header.php');
 							<span>☆</span>
 						</div>
 						<div class="ofr">
-							<p class="pric1"><del>$2000.00</del></p>
-							<p><span class="item_price">$500.00</span></p>
+							<p><span class="item_size"><?=htmlspecialchars($product['size'])?></span></p>
+							<p><span class="item_price"><?=htmlspecialchars($product['price'])?> €</span></p>
+							<?php if ($admin): ?>
+								<form method="post">
+									<input type="hidden" name="id_p_supprimer" value="<?=$product['id']?>"/>
+									<input type="submit" class="btn btn-danger" value="X"/>
+							</form>
+							<?php endif; ?>
 						</div>
 					</div>
 				</div>
-				<div class="product-grids product-grids-mdl simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".7s">
-					<div class="new-top">
-						<a href="single.php"><img src="images/g5.jpg" class="img-responsive" alt=""/></a>
-						<div class="new-text">
-							<ul>
-								<li><a href="single.php">Quick View </a></li>
-								<li><input type="number" class="item_quantity" min="1" value="1"></li>
-								<li><a class="item_add" href=""> Add to cart</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="new-bottom">
-						<h5><a class="name" href="single.php">Baby Romper</a></h5>
-						<div class="rating">
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span>☆</span>
-							<span>☆</span>
-						</div>
-						<div class="ofr">
-							<p class="pric1"><del>$1200.00</del></p>
-							<p><span class="item_price">$800.00</span></p>
-						</div>
-					</div>
-				</div>
-				<div class="product-grids simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".9s">
-					<div class="new-top">
-						<a href="single.php"><img src="images/g7.jpg" class="img-responsive" alt=""/></a>
-						<div class="new-text">
-							<ul>
-								<li><a href="single.php">Quick View </a></li>
-								<li><input type="number" class="item_quantity" min="1" value="1"></li>
-								<li><a class="item_add" href=""> Add to cart</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="new-bottom">
-						<h5><a class="name" href="single.php">Bear Diaper Bag</a></h5>
-						<div class="rating">
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span>☆</span>
-						</div>
-						<div class="ofr">
-							<p class="pric1"><del>$570.00</del></p>
-							<p><span class="item_price">$200.00</span></p>
-						</div>
-					</div>
-				</div>
-				<div class="product-grids simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".5s">
-					<div class="new-top">
-						<a href="single.php"><img src="images/g3.jpg" class="img-responsive" alt=""/></a>
-						<div class="new-text">
-							<ul>
-								<li><a href="single.php">Quick View </a></li>
-								<li><input type="number" class="item_quantity" min="1" value="1"></li>
-								<li><a class="item_add" href=""> Add to cart</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="new-bottom">
-						<h5><a class="name" href="single.php">Doctor Play Set</a></h5>
-						<div class="rating">
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-						</div>
-						<div class="ofr">
-							<p class="pric1"><del>$2000.00</del></p>
-							<p><span class="item_price">$500.00</span></p>
-						</div>
-					</div>
-				</div>
-				<div class="product-grids product-grids-mdl simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".7s">
-					<div class="new-top">
-						<a href="single.php"><img src="images/g6.jpg" class="img-responsive" alt=""/></a>
-						<div class="new-text">
-							<ul>
-								<li><a href="single.php">Quick View </a></li>
-								<li><input type="number" class="item_quantity" min="1" value="1"></li>
-								<li><a class="item_add" href=""> Add to cart</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="new-bottom">
-						<h5><a class="name" href="single.php">Baby Frock</a></h5>
-						<div class="rating">
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span>☆</span>
-						</div>
-						<div class="ofr">
-							<p class="pric1"><del>$180.00</del></p>
-							<p><span class="item_price">$100.00</span></p>
-						</div>
-					</div>
-				</div>
-				<div class="product-grids simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".9s">
-					<div class="new-top">
-						<a href="single.php"><img src="images/g2.jpg" class="img-responsive" alt=""/></a>
-						<div class="new-text">
-							<ul>
-								<li><a href="single.php">Quick View </a></li>
-								<li><input type="number" class="item_quantity" min="1" value="1"></li>
-								<li><a class="item_add" href=""> Add to cart</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="new-bottom">
-						<h5><a class="name" href="single.php">Pikachu Onesies</a></h5>
-						<div class="rating">
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span >☆</span>
-							<span>☆</span>
-						</div>
-						<div class="ofr">
-							<p class="pric1"><del>$2000.00</del></p>
-							<p><span class="item_price">$500.00</span></p>
-						</div>
-					</div>
-				</div>
-				<div class="product-grids simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".5s">
-					<div class="new-top">
-						<a href="single.php"><img src="images/g8.jpg" class="img-responsive" alt=""/></a>
-						<div class="new-text">
-							<ul>
-								<li><a href="single.php">Quick View </a></li>
-								<li><input type="number" class="item_quantity" min="1" value="1"></li>
-								<li><a class="item_add" href=""> Add to cart</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="new-bottom">
-						<h5><a class="name" href="single.php">Police Bike</a></h5>
-						<div class="rating">
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span>☆</span>
-							<span>☆</span>
-						</div>
-						<div class="ofr">
-							<p class="pric1"><del>$9050.00</del></p>
-							<p><span class="item_price">$9000.00</span></p>
-						</div>
-					</div>
-				</div>
-				<div class="product-grids product-grids-mdl simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".7s">
-					<div class="new-top">
-						<a href="single.php"><img src="images/g10.jpg" class="img-responsive" alt=""/></a>
-						<div class="new-text">
-							<ul>
-								<li><a href="single.php">Quick View </a></li>
-								<li><input type="number" class="item_quantity" min="1" value="1"></li>
-								<li><a class="item_add" href=""> Add to cart</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="new-bottom">
-						<h5><a class="name" href="single.php">Crocs Sandals</a></h5>
-						<div class="rating">
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span>☆</span>
-						</div>
-						<div class="ofr">
-							<p class="pric1"><del>$25.00</del></p>
-							<p><span class="item_price">$20.00</span></p>
-						</div>
-					</div>
-				</div>
-				<div class="product-grids simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".9s">
-					<div class="new-top">
-						<a href="single.php"><img src="images/g12.jpg" class="img-responsive" alt=""/></a>
-						<div class="new-text">
-							<ul>
-								<li><a href="single.php">Quick View </a></li>
-								<li><input type="number" class="item_quantity" min="1" value="1"></li>
-								<li><a class="item_add" href=""> Add to cart</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="new-bottom">
-						<h5><a class="name" href="single.php">Child Print Bike </a></h5>
-						<div class="rating">
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span>☆</span>
-							<span>☆</span>
-						</div>
-						<div class="ofr">
-							<p class="pric1"><del>$4000.00</del></p>
-							<p><span class="item_price">$3100.00</span></p>
-						</div>
-					</div>
-				</div>
+	<?php endforeach; ?>
 			</div>
 			<div class="col-md-3 rsidebar">
 				<div class="rsidebar-top">

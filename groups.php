@@ -33,6 +33,7 @@ if ($admin && isset($_POST['nom_ajout'])) {
 $r_product_nocat_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description, p.picture from product p where p.id not in (select id_p from a_product_category)');
 $r_product_cat_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description, p.picture from product p inner join a_product_category a on a.id_p=p.id where a.name_c=:cat');
 $r_product_insert = $dbh->prepare('insert into product (name, price, quantity, size, description, picture) values (:nom, :prix, :quantite, :taille, :description, :image)');
+$r_product_delete = $dbh->prepare('delete from product where id=:id');
 
 if ($admin && isset($_POST['nom_produit'])) {
 	$nom = $_POST['nom_produit'];
@@ -50,6 +51,11 @@ if ($admin && isset($_POST['nom_produit'])) {
 	$r_product_insert->execute();
 }
 
+if ($admin && isset($_POST['id_p_supprimer'])) {
+	$id = $_POST['id_p_supprimer'];
+	$r_product_delete->bindParam(':id', $id);
+	$r_product_delete->execute();
+}
 
 $r_categorie_list->execute();
 $groups = $r_categorie_list->fetchAll();
@@ -65,6 +71,7 @@ if (isset($_GET['n'])) {
 }
 
 ?>
+<!--
 <div class="groups">
 	<?php if ($admin) : ?>
 	<form method="post">
@@ -122,3 +129,4 @@ if (isset($_GET['n'])) {
 	</div>
 	<?php endforeach; ?>
 </div>
+-->
