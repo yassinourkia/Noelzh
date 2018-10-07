@@ -22,12 +22,14 @@ require_once('header.php');
 				<h4>Already have an Account ?<a href="signin.php">  Sign In »</a> </h4>
 			</div>
 			<div class="login-body">
-				<form class="wow fadeInUp animated" data-wow-delay=".7s">
-					<input type="text" placeholder="First Name" required="">
-					<input type="text" placeholder="Last Name" required="">
-					<input type="text" class="email" placeholder="Email Address" required="">
-					<input type="password" name="password" class="lock" placeholder="Password">
-					<input type="submit" name="Register" value="Register">
+				<form class="wow fadeInUp animated" data-wow-delay=".7s"  action="../login/register.php" method="post" enctype="multipart/form-data">
+					<input type="text" class="uemail" name="name" placeholder="Votre Nom" required="">
+					<input type="text" class="uemail"  name="email" placeholder="Email Address" required="">
+					<input type="text" class="uemail"  name="phone" placeholder="Numero de Telephone" required="">
+					<input type="file" class="uemail"  name="avatar" placeholder="Photo de Profile" required="">
+					<input type="text" class="uemail"  name="address" placeholder="Addresse" required="">
+					<input type="password" name="password" n class="lock" placeholder="Password">
+					<input type="submit" name="register" value="Register">
 				</form>
 			</div>
 		</div>
