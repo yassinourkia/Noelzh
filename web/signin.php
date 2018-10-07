@@ -22,10 +22,10 @@ require_once('header.php');
 				<h4>Welcome back to Modern Shoppe ! <br> Not a Member? <a href="register.php">  Register Now »</a> </h4>
 			</div>
 			<div class="login-body wow fadeInUp animated" data-wow-delay=".7s">
-				<form>
-					<input type="text" class="user" name="email" placeholder="Enter your email" required="">
-					<input type="password" name="password" class="lock" placeholder="Password">
-					<input type="submit" name="Sign In" value="Sign In">
+				<form action="../Login/login.php" method="post">
+					<input type="text" class="user" name="user_email" placeholder="Enter your email" required="">
+					<input type="password" name="user_password" class="lock" placeholder="Password">
+					<input type="submit" name="login" value="Sign In">
 					<div class="forgot-grid">
 						<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Remember me</label>
 						<div class="forgot">

@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -72,9 +75,17 @@ $(window).load(function() {
 	<div class="header">
 		<div class="top-header navbar navbar-default"><!--header-one-->
 			<div class="container">
-				<div class="nav navbar-nav wow fadeInLeft animated" data-wow-delay=".5s">
-					<h2>Welcome to Noelzh <a href="register.php">Register </a> Or <a href="signin.php">Sign In </a></h2>
-				</div>
+				<?php
+					if(isset($_SESSION['user_id']) && isset($_SESSION['user_name']))
+						echo '<div class="nav navbar-nav wow fadeInLeft animated" data-wow-delay=".5s">
+								<p>Welcome to Modern Shoppe <a href="web/profile.html">'.$_SESSION['user_name'].' </a></p>
+								<a href="../login/logout.php" >Logout </a>
+							</div>';
+					else 
+						echo '<div class="nav navbar-nav wow fadeInLeft animated" data-wow-delay=".5s">
+								<p>Welcome to Modern Shoppe <a href="register.php">Register </a> Or <a href="signin.php">Sign In </a></p>
+							</div>';
+				?>
 				<div class="nav navbar-nav navbar-right social-icons wow fadeInRight animated" data-wow-delay=".5s">
 					<ul>
 						<li><a href="#"> </a></li>
