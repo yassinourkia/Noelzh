@@ -15,7 +15,7 @@ require_once('header.php');
 	<div class="login-page">
 		<div class="title-info wow fadeInUp animated" data-wow-delay=".5s">
 			<h3 class="title">SignIn<span> Form</span></h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit curabitur </p>
+			<p><?php echo $_GET['message']; ?></p>
 		</div>
 		<div class="widget-shadow">
 			<div class="login-top wow fadeInUp animated" data-wow-delay=".7s">

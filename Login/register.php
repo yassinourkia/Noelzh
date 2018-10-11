@@ -27,50 +27,51 @@ if(isset($_POST["register"]))
 		$no_of_row = $statement->rowCount();
 		if($no_of_row > 0)
 		{
-			$message = '<div class="alert alert-danger">
-  						<strong>Attention !</strong> Email déja utilisé
-					</div>';
-			header("location:../web/register.php");
+			$message = '<div class="alert alert-danger">Email déja utilisé </div>';
+				header("location:../web/register.php?message=$message");
 		}
 		else
 		{
-			$user_password = $_POST['password'];
-			$user_encrypted_password = password_hash($user_password, PASSWORD_BCRYPT);
-			$user_activation_code = md5(rand());
-			$insert_query = "
-			INSERT INTO `user` (`id`, `email`, `password`, `name`, `phone`, `address`, `admin`, `avatar`) VALUES (NULL, :email, :password, :name,:phone,:address,2,:avatar)
-			";
-			$statement = $connect->prepare($insert_query);
-			$statement->execute(
-				array(
-					':name'			=>	$_POST['name'],
-					':email'			=>	$_POST['email'],
-					':password'		=>	$user_encrypted_password,
-					':phone'			=>	$_POST['phone'],
-					':address'			=>	$_POST['address'],
-					':avatar'			=>	file_get_contents($_FILES["avatar"]["tmp_name"])
-					
-				)
-			);
-			$result = $statement->fetchAll();
-			
-			if(isset($result))
+			if($_POST['password'] == $_POST['password_verify'])
 			{
-				$message = '<div class="alert alert-success">
-  								<strong>Bienvenu !</strong> vous etes bien inscrit, s"authentifier 
-							</div>';
-				header("location:../web/signin.php");
+				$user_password = $_POST['password'];
+				$user_encrypted_password = password_hash($user_password, PASSWORD_BCRYPT);
+				$user_activation_code = md5(rand());
+				$insert_query = "
+				INSERT INTO `user` (`id`, `email`, `password`, `name`, `phone`, `address`, `admin`, `avatar`) VALUES (NULL, :email, :password, :name,:phone,:address,2,:avatar)
+				";
+				$statement = $connect->prepare($insert_query);
+				$statement->execute(
+					array(
+						':name'			=>	$_POST['name'],
+						':email'			=>	$_POST['email'],
+						':password'		=>	$user_encrypted_password,
+						':phone'			=>	$_POST['phone'],
+						':address'			=>	$_POST['address'],
+						':avatar'			=>	file_get_contents($_FILES["avatar"]["tmp_name"])
+						
+					)
+				);
+				$result = $statement->fetchAll();
 				
-			}
-			
+				if(isset($result))
+				{
+					
+					$message = '<div class="alert alert-success"><strong>Bienvenu !</strong> vous etes bien inscrit, s"authentifier </div>';
+					header("location:../web/signin.php?message=$message");
+					
+				}
+			}else
+			{
+				$message = '<div class="alert alert-danger">Echec : verification email non validée</div>';
+				header("location:../web/register.php?message=$message");
+			}	
 		}
 	} 
 	else 
 	{
-    	$message = '<div class="alert alert-danger">
-  						<strong>Danger!</strong> Format d\'email non adapté.
-					</div>';
-		header("location:../web/register.php");
+    	$message = '<div class="alert alert-danger">Format Email non adapaté</div>';
+				header("location:../web/register.php?message=$message");
 	}
 	
 }
