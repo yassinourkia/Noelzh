@@ -20,7 +20,7 @@ require_once('header.php');
 		<div class="widget-shadow">
 			<div class="login-top wow fadeInUp animated" data-wow-delay=".7s">
 				<h3>Vous étes déja inscrit  ?<a href="signin.php">  Connectez vous »</a> </h3>
-				<h4><div <?php if(isset($_GET['message'])) echo 'class="alert alert-danger"';?> > <?php echo htmlspecialchars($_GET['message'],ENT_QUOTES,"UTF-8"); ?></div></h4>
+				<h4><div <?php if(isset($_GET['message'])) echo 'class="alert alert-danger"';?> > <?php if(isset($_GET['message'])) echo htmlspecialchars($_GET['message'],ENT_QUOTES,"UTF-8"); ?></div></h4>
 			</div>
 			<div class="login-body">
 				<form class="wow fadeInUp animated" data-wow-delay=".7s"  action="../login/register.php" method="post" enctype="multipart/form-data">
