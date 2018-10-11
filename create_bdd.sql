@@ -24,7 +24,8 @@ create table orders (
 drop table if exists categories;
 create table categories (
 	id		int primary key auto_increment,
-    name	varchar(50) not null
+    name	varchar(50) not null,
+    unique (name)
 );
 
 drop table if exists products;
@@ -40,8 +41,8 @@ create table products (
 
 drop table if exists a_products_categories;
 create table a_products_categories (
-    id_categories	varchar(50),
-    id_products		int not null,
+    id_categories	int,
+    id_products		int,
     primary key (id_categories, id_products),
     foreign key (id_categories) references categories(id),
     foreign key (id_products) references products(id)
@@ -49,8 +50,8 @@ create table a_products_categories (
 
 drop table if exists a_products_orders;
 create table a_products_orders (
-    id_orders	int not null,
-    id_products	int not null,
+    id_orders	int,
+    id_products	int,
 	quantity	int not null,
     primary key (id_orders, id_products),
     foreign key (id_orders) references orders(id),
