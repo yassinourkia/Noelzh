@@ -4,11 +4,11 @@ $admin = true;
 include_once('../connect.php');
 $dbh = $connect;
 
-$r_product_random_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description, p.picture from product p order by rand() limit 4');
-$r_product_nocat_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description, p.picture from product p where p.id not in (select id_p from a_product_category)');
-$r_product_cat_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description, p.picture from product p inner join a_product_category a on a.id_p=p.id where a.name_c=:cat');
-$r_product_insert = $dbh->prepare('insert into product (name, price, quantity, size, description, picture) values (:nom, :prix, :quantite, :taille, :description, :image)');
-$r_product_delete = $dbh->prepare('delete from product where id=:id');
+$r_product_random_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description, p.picture from products p order by rand() limit 4');
+$r_product_nocat_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description, p.picture from products p where p.id not in (select id_products from a_products_categories)');
+$r_product_cat_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description, p.picture from products p inner join a_products_categories a on a.id_products=p.id inner join categories c on c.id=a.id_categories where c.name=:cat');
+$r_product_insert = $dbh->prepare('insert into products (name, price, quantity, size, description, picture) values (:nom, :prix, :quantite, :taille, :description, :image)');
+$r_product_delete = $dbh->prepare('delete from products where id=:id');
 
 function random_products() {
 	global $r_product_random_list;

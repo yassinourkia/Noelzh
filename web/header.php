@@ -144,7 +144,7 @@ $(window).load(function() {
 					<!--navbar-header-->
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav top-nav-info">
-							<li><a href="index.php">Home</a></li>
+							<li><a href="index.php">Accueil</a></li>
 							
 							<?php foreach ($groups as $key => $group): ?>
 							<li class="dropdown grid">
@@ -184,9 +184,7 @@ $(window).load(function() {
 							</li>
 							<?php endforeach; ?>
 							
-							
-							
-							<li><a href="codes.php">Special Offers</a></li>
+							<li><a href="products.php">Autre</a></li>
 						</ul> 
 						<?php if ($admin) : ?>
 						<form method="post" action="../Products/groups.php">
