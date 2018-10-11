@@ -14,22 +14,25 @@ require_once('header.php');
 	<!--login-->
 	<div class="login-page">
 		<div class="title-info wow fadeInUp animated" data-wow-delay=".5s">
-			<h3 class="title">Register<span> Form</span></h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit curabitur </p>
+			<h3 class="title">Formulaire d'<span> inscription</span></h3>
+			<p>Bienvenu </p>
 		</div>
 		<div class="widget-shadow">
 			<div class="login-top wow fadeInUp animated" data-wow-delay=".7s">
-				<h4>Already have an Account ?<a href="signin.php">  Sign In »</a> </h4>
+				<h3>Vous étes déja inscris ?<a href="signin.php">  Connectez vous »</a> </h3>
+				<h4><?php 
+					echo $_GET['message']; ?></h4>
 			</div>
 			<div class="login-body">
 				<form class="wow fadeInUp animated" data-wow-delay=".7s"  action="../login/register.php" method="post" enctype="multipart/form-data">
 					<input type="text" class="uemail" name="name" placeholder="Votre Nom" required="">
-					<input type="text" class="uemail"  name="email" placeholder="Email Address" required="">
+					<input type="text" class="uemail"  name="email" placeholder="Adresse E-mail" required="">
 					<input type="text" class="uemail"  name="phone" placeholder="Numero de Telephone" required="">
-					<input type="file" class="uemail"  name="avatar" placeholder="Photo de Profile" required="">
+					<label>Photo de profile</label><input type="file" class="uemail"  name="avatar" placeholder="Photo de Profile" required=""><br>
 					<input type="text" class="uemail"  name="address" placeholder="Addresse" required="">
-					<input type="password" name="password" n class="lock" placeholder="Password">
-					<input type="submit" name="register" value="Register">
+					<input type="password" name="password" n class="lock" placeholder="Mot de Passe">
+					<input type="password" name="password_verify" n class="lock" placeholder="Vérifier votre mot de passe">
+					<input type="submit" name="register" value="S'inscrire">
 				</form>
 			</div>
 		</div>
