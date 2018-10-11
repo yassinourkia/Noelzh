@@ -1,15 +1,9 @@
 <?php
 $admin = true;
-try
-{
-    $dbh = new PDO('mysql:host=localhost;dbname=noelzh', 'root', '');
-    $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
-}
-catch(Exception $e)
-{
-    echo 'Echec de la connexion à la base de données';
-    exit();
-}
+
+include_once('../connect.php');
+$dbh = $connect;
+
 $r_categorie_list = $dbh->prepare('select c.name, count(id_p) as n_members from a_product_category a right join category c on c.name=a.name_c group by c.name');
 $r_categorie_insert = $dbh->prepare('insert into category (name) values (:nom)');
 $r_categorie_delete = $dbh->prepare('delete from category where name=:nom');

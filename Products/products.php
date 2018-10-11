@@ -1,15 +1,8 @@
 <?php
 $admin = true;
-try
-{
-    $dbh = new PDO('mysql:host=localhost;dbname=noelzh', 'root', '');
-    $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
-}
-catch(Exception $e)
-{
-    echo 'Echec de la connexion à la base de données';
-    exit();
-}
+
+include_once('../connect.php');
+$dbh = $connect;
 
 $r_product_nocat_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description, p.picture from product p where p.id not in (select id_p from a_product_category)');
 $r_product_cat_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description, p.picture from product p inner join a_product_category a on a.id_p=p.id where a.name_c=:cat');
