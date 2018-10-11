@@ -10,25 +10,6 @@ catch(Exception $e)
     echo 'Echec de la connexion à la base de données';
     exit();
 }
-$r_categorie_list = $dbh->prepare('select c.name, count(id_p) as n_members from a_product_category a right join category c on c.name=a.name_c group by c.name');
-$r_categorie_insert = $dbh->prepare('insert into category (name) values (:nom)');
-$r_categorie_delete = $dbh->prepare('delete from category where nom=:nom');
-
-if ($admin && isset($_POST['nom_supprimer'])) {
-	$nom = base64_decode($_POST['nom_supprimer']);
-	$r_categorie_delete->bindParam(':nom', $nom);
-	$res = $r_categorie_delete->execute();
-	if (! $res) {
-		echo 'Imposible de supprimer '.$nom;
-	}
-}
-
-if ($admin && isset($_POST['nom_ajout'])) {
-	$nom = $_POST['nom_ajout'];
-	$r_categorie_insert->bindParam(':nom', $nom);
-	$r_categorie_insert->execute();
-}
-
 
 $r_product_nocat_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description, p.picture from product p where p.id not in (select id_p from a_product_category)');
 $r_product_cat_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description, p.picture from product p inner join a_product_category a on a.id_p=p.id where a.name_c=:cat');
@@ -57,9 +38,6 @@ if ($admin && isset($_POST['id_p_supprimer'])) {
 	$r_product_delete->execute();
 }
 
-$r_categorie_list->execute();
-$groups = $r_categorie_list->fetchAll();
-
 if (isset($_GET['n'])) {
 	$name = urldecode($_GET['n']);
 	$r_product_cat_list->bindParam(':cat', $name);
@@ -72,33 +50,6 @@ if (isset($_GET['n'])) {
 
 ?>
 <!--
-<div class="groups">
-	<?php if ($admin) : ?>
-	<form method="post">
-		<input type="text" name="nom_ajout"/>
-		<input type="submit" value="Ajouter"/>
-	</form>
-	<?php endif; ?>
-	<div class="group">
-		<a href="/groups.php">
-			<h3>Sans categories <span></span></h3>
-		</a>
-	</div>
-	<?php foreach ($groups as $group): ?>
-	<div class="group">
-		<a href="/groups.php?n=<?=urlencode($group['name'])?>">
-			<h3><?=htmlspecialchars($group['name'])?> <span>(<?=htmlspecialchars($group['n_members']).' produit'.((int)$group['n_members']>=2?'s':'') ?>)</span></h3>
-		</a>
-		<?php if ($admin): ?>
-		<form method="post">
-			<input type="hidden" name="nom_supprimer" value="<?=base64_encode($group['name'])?>"/>
-			<input type="submit" value="Supprimer"/>
-		</form>
-		<?php endif; ?>
-	</div>
-	<?php endforeach; ?>
-</div>
-
 <div class="products">
 	<?php if ($admin) : ?>
 	<form method="post" enctype="multipart/form-data">

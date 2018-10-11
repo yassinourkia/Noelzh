@@ -1,6 +1,6 @@
 <?php
 require_once('header.php');
-require('../groups.php');
+require('../Products/products.php');
 ?>
 	<!--breadcrumbs-->
 	<div class="breadcrumbs">
