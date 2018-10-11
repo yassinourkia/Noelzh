@@ -150,17 +150,18 @@ $(window).load(function() {
 							<li class="dropdown grid">
 								<a href="#" class="dropdown-toggle list1" data-toggle="dropdown"><?=htmlspecialchars($key)?><b class="caret"></b></a>
 								<ul class="dropdown-menu multi-column menu-two multi-column3">
-									<?php if ($admin): ?>
-									<form method="post"  action="../Products/groups.php">
-										<input type="hidden" name="nom_supprimer" value="<?=base64_encode($key)?>"/>
-										<input type="submit" value="Supprimer"/>
-									</form>
-									<?php endif; ?>
 									<div class="row">
 										<div class="col-sm-4 menu-grids">
 											<ul class="multi-column-dropdown">
+												<li><a class="list" href="products.php?n=<?=urlencode($key)?>"><?=htmlspecialchars($key)?></a></li>
+												<?php if ($admin): ?>
+												<form method="post"  action="../Products/groups.php">
+													<input type="hidden" name="nom_supprimer" value="<?=base64_encode($key)?>"/>
+													<input type="submit" value="Supprimer"/>
+												</form>
+												<?php endif; ?>
 												<?php foreach ($group as $sg): ?>
-												<li><a class="list" href="products.php"><?=htmlspecialchars($sg)?></a></li>
+												<li><a class="list" href="products.php?n=<?=urlencode($sg)?>"><?=htmlspecialchars($sg)?></a></li>
 												<?php if ($admin): ?>
 												<form method="post" action="../Products/groups.php">
 													<input type="hidden" name="nom_supprimer" value="<?=base64_encode($key.'§'.$sg)?>"/>
