@@ -12,7 +12,7 @@ session_start();
 /**
  * Include our MySQL connection.
  */
-require 'connect.php';
+require '../connect.php';
 if(isset($_SESSION['user_id']))
 {
     header("location:../web/index.php");
