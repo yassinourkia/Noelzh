@@ -1,5 +1,6 @@
 <?php
 require_once('header.php');
+require_once('../Products/products.php');
 ?>
 	<!--banner-->
 	<div class="banner">
@@ -68,133 +69,20 @@ require_once('header.php');
 		</div>
 	</div>			
 	<!--//banner-->
-	<!--new-->
-	<div class="new">
-		<div class="container">
-			<div class="title-info wow fadeInUp animated" data-wow-delay=".5s">
-				<h3 class="title">New <span>Arrivals</span></h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit curabitur </p>
-			</div>
-			<div class="new-info">
-				<div class="col-md-3 new-grid simpleCart_shelfItem wow flipInY animated" data-wow-delay=".5s">
-					<div class="new-top">
-						<a href="single.php"><img src="images/g9.jpg" class="img-responsive" alt=""/></a>
-						<div class="new-text">
-							<ul>
-								<li><a class="item_add" href=""> Add to cart</a></li>
-								<li><a href="single.php">Quick View </a></li>
-								<li><a href="products.php">Show Details </a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="new-bottom">
-						<h5><a class="name" href="single.php">Baby Red Dress </a></h5>
-						<div class="rating">
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span>☆</span>
-						</div>	
-						<div class="ofr">
-							<p class="pric1"><del>$2000.00</del></p>
-							<p><span class="item_price">$500.00</span></p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 new-grid new-mdl simpleCart_shelfItem wow flipInY animated" data-wow-delay=".7s">
-					<div class="new-top">
-						<a href="single.php"><img src="images/g10.jpg" class="img-responsive" alt=""/></a>
-						<div class="new-text">
-							<ul>
-								<li><a class="item_add" href=""> Add to cart</a></li>
-								<li><a href="single.php">Quick View </a></li>
-								<li><a href="products.php">Show Details </a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="new-bottom">
-						<h5><a class="name" href="single.php">Crocs Sandals </a></h5>
-						<div class="rating">
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span>☆</span>
-						</div>	
-						<div class="ofr">
-							<p><span class="item_price">$50.00</span></p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 new-grid new-mdl1 simpleCart_shelfItem wow flipInY animated" data-wow-delay=".9s">
-					<div class="new-top">
-						<a href="single.php"><img src="images/g11.jpg" class="img-responsive" alt=""/></a>
-						<div class="new-text">
-							<ul>
-								<li><a class="item_add" href=""> Add to cart</a></li>
-								<li><a href="single.php">Quick View </a></li>
-								<li><a href="products.php">Show Details </a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="new-bottom">
-						<h5><a class="name" href="single.php">Pink Sip Cup </a></h5>
-						<div class="rating">
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span>☆</span>
-						</div>	
-						<div class="ofr">
-							<p><span class="item_price">$150.00</span></p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 new-grid simpleCart_shelfItem wow flipInY animated" data-wow-delay="1.1s">
-					<div class="new-top">
-						<a href="single.php"><img src="images/g12.jpg" class="img-responsive" alt=""/></a>
-						<div class="new-text">
-							<ul>
-								<li><a class="item_add" href=""> Add to cart</a></li>
-								<li><a href="single.php">Quick View </a></li>
-								<li><a href="products.php">Show Details </a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="new-bottom">
-						<h5><a class="name" href="single.php">Child Print Bike </a></h5>
-						<div class="rating">
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span class="on">☆</span>
-							<span>☆</span>
-						</div>	
-						<div class="ofr">
-							<p class="pric1"><del>$5050.00</del></p>
-							<p><span class="item_price">$3020.00</span></p>
-						</div>
-					</div>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>		
-	<!--//new-->
 	<!--gallery-->
 	<div class="gallery">
 		<div class="container">
 			<div class="title-info wow fadeInUp animated" data-wow-delay=".5s">
-				<h3 class="title">Popular<span> Products</span></h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit curabitur </p>
+				<h3 class="title">Nos<span> suggestions</span></h3>
+				<p>Une collection des meilleurs produits pour Noël</p>
 			</div>
+			
 			<div class="gallery-info">
-				<div class="col-md-3 gallery-grid wow flipInY animated" data-wow-delay=".5s">
-					<a href="products.php"><img src="images/g1.jpg" class="img-responsive" alt=""/></a>
+				<?php foreach (random_products() as $num => $p) : ?>
+				<div class="col-md-3 gallery-grid gallery-grid<?php if ($num > 0){ echo $num; }?> wow flipInY animated" data-wow-delay=".5s">
+					<a href="single.php?pid=<?=$p['id']?>"><img src="data:image/png;base64,<?=base64_encode($p['picture'])?>" class="img-responsive"/></a>
 					<div class="gallery-text simpleCart_shelfItem">
-						<h5><a class="name" href="single.php">Baby Girls' Dress </a></h5>
+						<h5><a class="name" href="single.php?pid=<?=$p['id']?>"><?=htmlspecialchars($p['name'])?></a></h5>
 						<p><span class="item_price">100$</span></p>
 						<h4 class="sizes">Sizes: <a href="#"> s</a> - <a href="#">m</a> - <a href="#">l</a> - <a href="#">xl</a> </h4>
 						<ul>
@@ -204,97 +92,7 @@ require_once('header.php');
 						</ul>
 					</div>
 				</div>
-				<div class="col-md-3 gallery-grid gallery-grid1 wow flipInY animated" data-wow-delay=".7s">
-					<a href="products.php"><img src="images/g2.jpg" class="img-responsive" alt=""/></a>
-					<div class="gallery-text simpleCart_shelfItem">
-						<h5><a class="name" href="single.php">Pokemon Onesies</a></h5>
-						<p><span class="item_price">79$</span></p>
-						<h4 class="sizes">Sizes: <a href="#"> s</a> - <a href="#">m</a> - <a href="#">l</a> - <a href="#">xl</a> </h4>
-						<ul>
-							<li><a href="#"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
-							<li><a class="item_add" href="#"><span class="glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
-							<li><a href="#"><span class="glyphicon glyphicon glyphicon-heart-empty" aria-hidden="true"></span></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-3 gallery-grid gallery-grid2 wow flipInY animated" data-wow-delay=".9s">
-					<a href="products.php"><img src="images/g3.jpg" class="img-responsive" alt=""/></a>
-					<div class="gallery-text simpleCart_shelfItem">
-						<h5><a class="name" href="single.php">Doctor Play Set</a></h5>
-						<p><span class="item_price">30$</span></p>
-						<h4 class="sizes">Sizes: <a href="#"> s</a> - <a href="#">m</a> - <a href="#">l</a> - <a href="#">xl</a> </h4>
-						<ul>
-							<li><a href="#"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
-							<li><a class="item_add" href="#"><span class="glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
-							<li><a href="#"><span class="glyphicon glyphicon glyphicon-heart-empty" aria-hidden="true"></span></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-3 gallery-grid wow flipInY animated" data-wow-delay="1.1s">
-					<a href="products.php"><img src="images/g4.jpg" class="img-responsive" alt=""/></a>
-					<div class="gallery-text simpleCart_shelfItem">
-						<h5><a class="name" href="single.php">Cap & Gloves Set</a></h5>
-						<p><span class="item_price">15$</span></p>
-						<h4 class="sizes">Sizes: <a href="#"> s</a> - <a href="#">m</a> - <a href="#">l</a> - <a href="#">xl</a> </h4>
-						<ul>
-							<li><a href="#"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
-							<li><a class="item_add" href="#"><span class="glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
-							<li><a href="#"><span class="glyphicon glyphicon glyphicon-heart-empty" aria-hidden="true"></span></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-3 gallery-grid wow flipInY animated" data-wow-delay=".5s">
-					<a href="products.php"><img src="images/g5.jpg" class="img-responsive" alt=""/></a>
-					<div class="gallery-text simpleCart_shelfItem">
-						<h5><a class="name" href="single.php">Full Sleeves Romper</a></h5>
-						<p><span class="item_price">60$</span></p>
-						<h4 class="sizes">Sizes: <a href="#"> s</a> - <a href="#">m</a> - <a href="#">l</a> - <a href="#">xl</a> </h4>
-						<ul>
-							<li><a href="#"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
-							<li><a class="item_add" href="#"><span class="glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
-							<li><a href="#"><span class="glyphicon glyphicon glyphicon-heart-empty" aria-hidden="true"></span></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-3 gallery-grid gallery-grid1 wow flipInY animated" data-wow-delay=".7s">
-					<a href="products.php"><img src="images/g6.jpg" class="img-responsive" alt=""/></a>
-					<div class="gallery-text simpleCart_shelfItem">
-						<h5><a class="name" href="single.php">Party Wear Frock</a></h5>
-						<p><span class="item_price">80$</span></p>
-						<h4 class="sizes">Sizes: <a href="#"> s</a> - <a href="#">m</a> - <a href="#">l</a> - <a href="#">xl</a> </h4>
-						<ul>
-							<li><a href="#"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
-							<li><a class="item_add" href="#"><span class="glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
-							<li><a href="#"><span class="glyphicon glyphicon glyphicon-heart-empty" aria-hidden="true"></span></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-3 gallery-grid gallery-grid2 wow flipInY animated" data-wow-delay=".9s">
-					<a href="products.php"><img src="images/g7.jpg" class="img-responsive" alt=""/></a>
-					<div class="gallery-text simpleCart_shelfItem">
-						<h5><a class="name" href="single.php">Bear Diaper Bag</a></h5>
-						<p><span class="item_price">110$</span></p>
-						<h4 class="sizes">Sizes: <a href="#"> s</a> - <a href="#">m</a> - <a href="#">l</a> - <a href="#">xl</a> </h4>
-						<ul>
-							<li><a href="#"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
-							<li><a class="item_add" href="#"><span class="glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
-							<li><a href="#"><span class="glyphicon glyphicon glyphicon-heart-empty" aria-hidden="true"></span></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-3 gallery-grid wow flipInY animated" data-wow-delay="1.1s">
-					<a href="products.php"><img src="images/g8.jpg" class="img-responsive" alt=""/></a>
-					<div class="gallery-text simpleCart_shelfItem">
-						<h5><a class="name" href="single.php">Battery Police Bike</a></h5>
-						<p><span class="item_price">300$</span></p>
-						<h4 class="sizes">Sizes: <a href="#"> s</a> - <a href="#">m</a> - <a href="#">l</a> - <a href="#">xl</a> </h4>
-						<ul>
-							<li><a href="#"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
-							<li><a class="item_add" href="#"><span class="glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
-							<li><a href="#"><span class="glyphicon glyphicon glyphicon-heart-empty" aria-hidden="true"></span></a></li>
-						</ul>
-					</div>
-				</div>
+				<?php endforeach; ?>
 				<div class="clearfix"></div>
 			</div>
 		</div>

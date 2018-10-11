@@ -46,6 +46,9 @@ if(isset($_POST["login"]))
                     if(password_verify($_POST["user_password"], $row["password"]))
                     //if($row["password"] == $_POST["user_password"])
                     {
+                        if($row['admin'] == 2)
+                            $_SESSION['admin_id'] = true;
+
                         $_SESSION['user_id'] = $row['id'];
                         $_SESSION['user_name'] = $row['name'];
                         $_SESSION['user_avatar'] = $row['avatar'];

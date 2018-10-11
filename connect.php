@@ -14,7 +14,7 @@ define('MYSQL_PASSWORD', '');
 define('MYSQL_HOST', 'localhost');
 
 //The name of our database.
-define('MYSQL_DATABASE', 'ecommerce');
+define('MYSQL_DATABASE', 'noelzh');
 
 
 $pdoOptions = array(
