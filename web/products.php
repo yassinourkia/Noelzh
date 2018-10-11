@@ -1,6 +1,7 @@
 <?php
 require_once('header.php');
-require('../groups.php');
+require('../Products/products.php');
+require('../Products/groups.php');
 ?>
 	<!--breadcrumbs-->
 	<div class="breadcrumbs">
@@ -37,10 +38,10 @@ require('../groups.php');
 			<label for="description">Description</label>
 			<textarea name="description" class="form-control" placeholder="Description du produit" maxlength="149"></textarea>
 		</div>
-		<?php foreach ($groups as $group): ?>
+		<?php foreach ($groups_raw as $group): ?>
 		<div class="form-check">
 			<input class="form-check-input" type="checkbox" name="group" value="<?=urlencode($group['name'])?>"></input>
-			<label class="form-check-label" for="group"><?=urlencode($group['name'])?></label>
+			<label class="form-check-label" for="group"><?=htmlspecialchars($group['name'])?></label>
 		</div>
 		<?php endforeach; ?>
 		<input type="submit" class="form-control btn btn-primary" value="Ajouter"/>
