@@ -27,7 +27,7 @@ if(isset($_POST["register"]))
 		$no_of_row = $statement->rowCount();
 		if($no_of_row > 0)
 		{
-			$message = '<div class="alert alert-danger">Email déja utilisé </div>';
+			$message = 'Email déja utilisé ';
 				header("location:../web/register.php?message=$message");
 		}
 		else
@@ -57,20 +57,20 @@ if(isset($_POST["register"]))
 				if(isset($result))
 				{
 					
-					$message = '<div class="alert alert-success"><strong>Bienvenu !</strong> vous etes bien inscrit, s"authentifier </div>';
+					$message ='Bienvenu ! vous etes bien inscrit, s"authentifier ';
 					header("location:../web/signin.php?message=$message");
 					
 				}
 			}else
 			{
-				$message = '<div class="alert alert-danger">Echec : verification email non validée</div>';
+				$message = 'Echec : verification email non validée';
 				header("location:../web/register.php?message=$message");
 			}	
 		}
 	} 
 	else 
 	{
-    	$message = '<div class="alert alert-danger">Format Email non adapaté</div>';
+    	$message = 'Format Email non adapaté';
 				header("location:../web/register.php?message=$message");
 	}
 	
