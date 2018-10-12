@@ -26,7 +26,7 @@ if(isset($_POST["login"]))
     {
         
         $query = "
-        SELECT * FROM user 
+        SELECT * FROM users 
             WHERE email = :user_email
         ";
         $statement = $connect->prepare($query);
@@ -63,12 +63,9 @@ if(isset($_POST["login"]))
         }
         else
         {
-            $message = "<label class='text-danger'>Wrong Email Address</label>";
-            echo $message;
+            $message = "Wrong Email Address";
+            header("location:../web/signin.php?message=$message");
         }
-    }else
-    {
-        echo "email madazch";
     }
 }
 else

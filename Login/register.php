@@ -15,7 +15,7 @@ if(isset($_POST["register"]))
 	if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) 
 	{
     	$query = "
-		SELECT * FROM user 
+		SELECT * FROM users 
 		WHERE email = :email
 		";
 		$statement = $connect->prepare($query);
@@ -38,7 +38,7 @@ if(isset($_POST["register"]))
 				$user_encrypted_password = password_hash($user_password, PASSWORD_BCRYPT);
 				$user_activation_code = md5(rand());
 				$insert_query = "
-				INSERT INTO `user` (`id`, `email`, `password`, `name`, `phone`, `address`, `admin`, `avatar`) VALUES (NULL, :email, :password, :name,:phone,:address,2,:avatar)
+				INSERT INTO `users` (`id`, `email`, `password`, `name`, `phone`, `address`, `admin`, `avatar`) VALUES (NULL, :email, :password, :name,:phone,:address,2,:avatar)
 				";
 				$statement = $connect->prepare($insert_query);
 				$statement->execute(
@@ -57,7 +57,7 @@ if(isset($_POST["register"]))
 				if(isset($result))
 				{
 					
-					$message ='Bienvenu ! vous etes bien inscrit, s"authentifier ';
+					$message ='Bienvenu ! vous êtes bien inscrit, s\'authentifier ';
 					header("location:../web/signin.php?message=$message");
 					
 				}
@@ -70,7 +70,7 @@ if(isset($_POST["register"]))
 	} 
 	else 
 	{
-    	$message = 'Format Email non adapaté';
+    	$message = 'Format Email non adapatée';
 				header("location:../web/register.php?message=$message");
 	}
 	
