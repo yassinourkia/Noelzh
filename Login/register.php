@@ -57,7 +57,7 @@ if(isset($_POST["register"]))
 				if(isset($result))
 				{
 					
-					$message ='Bienvenu ! vous etes bien inscrit, s"authentifier ';
+					$message ='Bienvenu ! vous êtes bien inscrit, s\'authentifier ';
 					header("location:../web/signin.php?message=$message");
 					
 				}
@@ -70,7 +70,7 @@ if(isset($_POST["register"]))
 	} 
 	else 
 	{
-    	$message = 'Format Email non adapaté';
+    	$message = 'Format Email non adapatée';
 				header("location:../web/register.php?message=$message");
 	}
 	
