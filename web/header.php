@@ -185,6 +185,9 @@ $(window).load(function() {
 							<?php endforeach; ?>
 							
 							<li><a href="products.php">Autre</a></li>
+							<?php if ($admin) : ?>
+							<li><a href="adm_product.php">PRODUCT ADMIN</a></li>
+							<?php endif; ?>
 						</ul> 
 						<?php if ($admin) : ?>
 						<form method="post" action="../Products/groups.php">

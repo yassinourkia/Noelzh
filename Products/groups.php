@@ -46,31 +46,3 @@ foreach ($groups_raw as $gr) {
 }
 
 ?>
-<!--
-<div class="groups">
-	<?php if ($admin) : ?>
-	<form method="post">
-		<input type="text" name="nom_ajout"/>
-		<input type="submit" value="Ajouter"/>
-	</form>
-	<?php endif; ?>
-	<div class="group">
-		<a href="/groups.php">
-			<h3>Sans categories <span></span></h3>
-		</a>
-	</div>
-	<?php foreach ($groups as $group): ?>
-	<div class="group">
-		<a href="/groups.php?n=<?=urlencode($group['name'])?>">
-			<h3><?=htmlspecialchars($group['name'])?> <span>(<?=htmlspecialchars($group['n_members']).' produit'.((int)$group['n_members']>=2?'s':'') ?>)</span></h3>
-		</a>
-		<?php if ($admin): ?>
-		<form method="post">
-			<input type="hidden" name="nom_supprimer" value="<?=base64_encode($group['name'])?>"/>
-			<input type="submit" value="Supprimer"/>
-		</form>
-		<?php endif; ?>
-	</div>
-	<?php endforeach; ?>
-</div>
--->
