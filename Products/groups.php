@@ -4,9 +4,9 @@ $admin = true;
 include_once('../connect.php');
 $dbh = $connect;
 
-$r_categorie_list = $dbh->prepare('select c.name, count(id_p) as n_members from a_product_category a right join category c on c.name=a.name_c group by c.name');
-$r_categorie_insert = $dbh->prepare('insert into category (name) values (:nom)');
-$r_categorie_delete = $dbh->prepare('delete from category where name=:nom');
+$r_categorie_list = $dbh->prepare('select c.name, count(id_products) as n_members from a_products_categories a right join categories c on c.id=a.id_categories group by c.name');
+$r_categorie_insert = $dbh->prepare('insert into categories (name) values (:nom)');
+$r_categorie_delete = $dbh->prepare('delete from categories where name=:nom');
 
 
 if ($admin && isset($_POST['nom_supprimer'])) {
