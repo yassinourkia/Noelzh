@@ -4,6 +4,7 @@ $admin = true;
 include_once('../connect.php');
 $dbh = $connect;
 
+$r_product_select = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description, p.picture from products p where p.id=:id_produit');
 $r_product_random_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description, p.picture from products p order by rand() limit 4');
 $r_product_nocat_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description, p.picture from products p where p.id not in (select id_products from a_products_categories)');
 $r_product_cat_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description, p.picture from products p inner join a_products_categories a on a.id_products=p.id inner join categories c on c.id=a.id_categories where c.name=:cat');
@@ -15,6 +16,13 @@ function random_products() {
 	global $r_product_random_list;
 	$r_product_random_list->execute();
 	return $r_product_random_list->fetchAll();
+}
+
+function product($id) {
+	global $r_product_select;
+	$r_product_select->bindParam(':id_produit', $id, PDO::PARAM_INT);
+	$r_product_select->execute();
+	return $r_product_select->fetch();
 }
 
 if ($admin && isset($_POST['nom_produit'])) {
