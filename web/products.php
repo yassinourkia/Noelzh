@@ -20,7 +20,7 @@ require('../Products/groups.php');
 	<?php foreach ($products as $key => $product): ?>
 				<div class="product-grids <?php if (($key+1) % 3 == 2) echo 'product-grids-mdl'; ?> simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".5s">
 					<div class="new-top">
-						<a href="single.php?pid=<?=$product['id']?>"><img src="data:image/png;base64,<?=base64_encode($product['picture'])?>" class="img-responsive"/></a>
+						<a href="single.php?pid=<?=$product['id']?>"><img src="../Products/image.php?id=<?=urlencode($product['id'])?>" class="img-responsive"/></a>
 						<div class="new-text">
 							<ul>
 								<li><a href="single.php?pid=<?=$product['id']?>">Quick View </a></li>

@@ -80,7 +80,7 @@ require_once('../Products/products.php');
 			<div class="gallery-info">
 				<?php foreach (random_products() as $num => $p) : ?>
 				<div class="col-md-3 gallery-grid gallery-grid<?php if ($num > 0){ echo $num; }?> wow flipInY animated" data-wow-delay=".5s">
-					<a href="single.php?pid=<?=$p['id']?>"><img src="data:image/png;base64,<?=base64_encode($p['picture'])?>" class="img-responsive"/></a>
+					<a href="single.php?pid=<?=$p['id']?>"><img src="../Products/image.php?id=<?=urlencode($p['id'])?>" class="img-responsive"/></a>
 					<div class="gallery-text simpleCart_shelfItem">
 						<h5><a class="name" href="single.php?pid=<?=$p['id']?>"><?=htmlspecialchars($p['name'])?></a></h5>
 						<p><span class="item_price">100$</span></p>
