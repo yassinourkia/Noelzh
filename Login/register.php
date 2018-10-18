@@ -27,7 +27,7 @@ if(isset($_POST["register"]))
 		$no_of_row = $statement->rowCount();
 		if($no_of_row > 0)
 		{
-			$message = 'Email déja utilisé ';
+			$message = 'Email déjà utilisé ';
 				header("location:../web/register.php?message=$message");
 		}
 		else
@@ -38,7 +38,7 @@ if(isset($_POST["register"]))
 				$user_encrypted_password = password_hash($user_password, PASSWORD_BCRYPT);
 				$user_activation_code = md5(rand());
 				$insert_query = "
-				INSERT INTO `users` (`id`, `email`, `password`, `name`, `phone`, `address`, `admin`, `avatar`) VALUES (NULL, :email, :password, :name,:phone,:address,2,:avatar)
+				INSERT INTO `users` (`id`, `email`, `password`, `name`, `phone`, `address`, `admin`, `avatar`) VALUES (NULL, :email, :password, :name,:phone,:address,0,:avatar)
 				";
 				$statement = $connect->prepare($insert_query);
 				$statement->execute(
@@ -57,7 +57,7 @@ if(isset($_POST["register"]))
 				if(isset($result))
 				{
 					
-					$message ='Bienvenu ! vous êtes bien inscrit, s\'authentifier ';
+					$message ='Bienvenue ! vous êtes bien inscrit, s\'authentifier ';
 					header("location:../web/signin.php?message=$message");
 					
 				}
@@ -70,7 +70,7 @@ if(isset($_POST["register"]))
 	} 
 	else 
 	{
-    	$message = 'Format Email non adapatée';
+    	$message = 'Format Email non adapté';
 				header("location:../web/register.php?message=$message");
 	}
 	

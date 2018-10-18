@@ -1,5 +1,5 @@
 <?php
-$admin = true;
+$admin = isset($_SESSION['admin_id']) ? $_SESSION['admin_id']: false;
 
 include_once('../connect.php');
 $dbh = $connect;
