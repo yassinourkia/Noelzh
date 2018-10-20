@@ -41,7 +41,7 @@ require_once('header.php');
 		<div class="login-page-bottom">
 			<h5> - OR -</h5>
 			<div class="social-btn"><a href="#"><i>Se connecter avec Facebook</i></a></div>
-			<div class="social-btn sb-two"><a href="#"><i>Se connecter vous avec Twitter</i></a></div>
+			<div class="social-btn sb-two"><a href="#"><i>Se connecter avec Twitter</i></a></div>
 		</div>
 	</div>
 	<!--//login-->
