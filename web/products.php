@@ -55,7 +55,7 @@ require('../Products/groups.php');
 			<div class="col-md-3 rsidebar">
 				<div class="rsidebar-top">
 					<div class="slider-left">
-						<h4>Filter par prix</h4>
+						<h4>Filtrer par prix</h4>
 						<input type="text" id="amount"/>
 						<div id="slider-range"></div>
 						<!---->
@@ -77,7 +77,7 @@ require('../Products/groups.php');
 						<!---->
 					</div>
 					<div class="sidebar-row">
-						<h4>DISCOUNTS</h4>
+						<h4>RÉDUCTIONS</h4>
 						<div class="row row1">
 							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>70% - 60% (5)</label>
 							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>50% - 40% (7)</label>
@@ -86,7 +86,7 @@ require('../Products/groups.php');
 						</div>
 					</div>
 					<div class="sidebar-row">
-						<h4>Couleur</h4>
+						<h4>COULEURS</h4>
 						<div class="row row1 scroll-pane">
 							<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Blanc</label>
 							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rose</label>
