@@ -25,7 +25,7 @@ require('../Products/groups.php');
 							<ul>
 								<li><a href="single.php?pid=<?=$product['id']?>">Voir les details </a></li>
 								<li><input type="number" class="item_quantity" min="1" value="1"></li>
-								<li><a class="item_add" href="">Ajouter au chariot</a></li>
+								<li><a class="item_add" href="">Ajouter au panier</a></li>
 							</ul>
 						</div>
 					</div>

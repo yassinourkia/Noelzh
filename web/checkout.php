@@ -6,7 +6,7 @@ require_once('header.php');
 		<div class="container">
 			<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
 				<li><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Accueil</a></li>
-				<li class="active">Passer commande</li>
+				<li class="active">Panier</li>
 			</ol>
 		</div>
 	</div>

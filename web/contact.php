@@ -6,7 +6,7 @@ require_once('header.php');
 		<div class="container">
 			<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
 				<li><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Accueil</a></li>
-				<li class="active">Contacter nous</li>
+				<li class="active">Nous contactez</li>
 			</ol>
 		</div>
 	</div>
@@ -26,7 +26,7 @@ require_once('header.php');
 			<div class="address-row">
 				<div class="col-md-6 address-left wow fadeInLeft animated" data-wow-delay=".5s">
 					<div class="address-grid">
-						<h4 class="wow fadeIndown animated" data-wow-delay=".5s">Laisser nous un message </h4>
+						<h4 class="wow fadeIndown animated" data-wow-delay=".5s">Nous laisser un message </h4>
 						<form>
 							<input class="wow fadeIndown animated" data-wow-delay=".6s" type="text" placeholder="Nom" required="">
 							<input class="wow fadeIndown animated" data-wow-delay=".7s" type="text" placeholder="Email" required="">

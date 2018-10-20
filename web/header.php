@@ -109,11 +109,11 @@ $(window).load(function() {
 					</ul>
 				</div>
 				<div class="nav navbar-nav logo wow zoomIn animated" data-wow-delay=".7s">
-					<h1><a href="index.php">Noelzh<span class="tag">Tout ce qu'il vous faut pour un noël réussi </span> </a></h1>
+					<h1><a href="index.php">Noelzh<span class="tag">Tout ce qu'il vous faut pour un Noël réussi </span> </a></h1>
 				</div>
 				<div class="nav navbar-nav navbar-right header-two-right">
 					<div class="header-right my-account">
-						<a href="contact.php"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Contacter nous</a>						
+						<a href="contact.php"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Nous contacter</a>						
 					</div>
 					<div class="header-right cart">
 						<a href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
@@ -186,7 +186,7 @@ $(window).load(function() {
 							
 							<li><a href="products.php">Autre</a></li>
 							<?php if ($admin) : ?>
-							<li><a href="adm_product.php">Administation des produits</a></li>
+							<li><a href="adm_product.php">AdministRation</a></li>
 							<?php endif; ?>
 						</ul> 
 						<?php if ($admin) : ?>

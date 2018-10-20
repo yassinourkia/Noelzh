@@ -8,8 +8,8 @@ require_once('../Products/products.php');
 			<div class="banner-text">			
 				<div class="col-sm-5 banner-left wow fadeInLeft animated" data-wow-delay=".5s">			
 					<h2>Notre collection</h2>
-					<h3>Dans un avenir certain</h3>
-					<h4>Nos créations innovantes</h4>
+					<h3>Bientôt</h3>
+					<h4>Nos nouveautés</h4>
 					<div class="count main-row">
 						<ul id="example">
 							<li><span class="hours">00</span><p class="hours_text">Heures</p></li>

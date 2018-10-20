@@ -3,14 +3,14 @@
 		<div class="container">
 			<div class="footer-info">
 				<div class="col-md-4 footer-grids wow fadeInUp animated" data-wow-delay=".5s">
-					<h4 class="footer-logo"><a href="index.php">Noelzh <span class="tag">Tout ce qu'il vous faut pour un noël réussi </span> </a></h4>
+					<h4 class="footer-logo"><a href="index.php">Noelzh <span class="tag">Tout ce qu'il vous faut pour un Noël réussi </span> </a></h4>
 					<p>© 2016 Modern Shoppe. Tous droits réservés | Designer: <a href="http://w3layouts.com" target="_blank">W3layouts</a></p>
 				</div>
 				<div class="col-md-4 footer-grids wow fadeInUp animated" data-wow-delay=".7s">
 					<h3>Liens utiles</h3>
 					<ul>
 						<li><a href="about.php">À propos</a></li>
-						<li><a href="contact.php">Contacter nous</a></li>
+						<li><a href="contact.php">Nous contacter</a></li>
 						<li><a href="faq.php">FAQ</a></li>
 						<li><a href="#">Mentions légales</a></li>
 					</ul>

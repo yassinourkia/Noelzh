@@ -54,10 +54,10 @@ if ($product != null):
 					</ul>
 					<div class="clearfix"> </div>
 					<div class="quantity">
-						<p class="qty"> Quantitée disponible :  </p><input min="1" type="number" value="1" class="item_quantity">
+						<p class="qty"> Quantité disponible :  </p><input min="1" type="number" value="1" class="item_quantity">
 					</div>
 					<div class="btn_form">
-						<a href="#" class="add-cart item_add">Ajouter au chariot</a>	
+						<a href="#" class="add-cart item_add">Ajouter au panier</a>	
 					</div>
 				</div>
 			   <div class="clearfix"> </div>
