@@ -5,7 +5,7 @@ require_once('header.php');
 	<div class="breadcrumbs">
 		<div class="container">
 			<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
-				<li><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+				<li><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Accueil</a></li>
 				<li class="active">FAQ </li>
 			</ol>
 		</div>
@@ -15,7 +15,7 @@ require_once('header.php');
 	<div class="faq-info">
 		<div class="container">
 			<div class="title-info">
-				<h3 class="title">Frequently Asked<span> Questions</span></h3>
+				<h3 class="title">Foire Aux<span> Questions</span></h3>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit curabitur </p>
 			</div>
 			<ul class="faq">
