@@ -121,7 +121,7 @@ $(window).load(function() {
 								<span class="simpleCart_total"> $0.00 </span> (<span id="simpleCart_quantity" class="simpleCart_quantity"> 0 </span>) 
 						</a></h4>
 						<div class="cart-box">
-							<p><a href="javascript:;" class="simpleCart_empty">Vider le chariot</a></p>
+							<p><a href="javascript:;" class="simpleCart_empty">Vider le panier</a></p>
 							<div class="clearfix"> </div>
 						</div>
 					</div>
