@@ -84,7 +84,7 @@ $(window).load(function() {
 							</div>';
 					else 
 						echo '<div class="nav navbar-nav wow fadeInLeft animated" data-wow-delay=".5s">
-								<p>Bienvenue chez Noelzh  <a href="register.php">crée ton compte </a> ou <a href="signin.php">connecte-toi ! </a></p>
+								<p>Bienvenue chez Noelzh  <a href="register.php">créer votre compte </a> ou <a href="signin.php">connectez vous ! </a></p>
 							</div>';
 				?>
 				<div class="nav navbar-nav navbar-right social-icons wow fadeInRight animated" data-wow-delay=".5s">
