@@ -84,7 +84,7 @@ $(window).load(function() {
 							</div>';
 					else 
 						echo '<div class="nav navbar-nav wow fadeInLeft animated" data-wow-delay=".5s">
-								<p>Bienvenue chez Noelzh  <a href="register.php">créer votre compte </a> ou <a href="signin.php">connectez vous ! </a></p>
+								<p>Bienvenue chez Noelzh ! <a href="register.php">Créer un compte </a> - <a href="signin.php">Se Connecter</a></p>
 							</div>';
 				?>
 				<div class="nav navbar-nav navbar-right social-icons wow fadeInRight animated" data-wow-delay=".5s">
@@ -186,7 +186,7 @@ $(window).load(function() {
 							
 							<li><a href="products.php">Autre</a></li>
 							<?php if ($admin) : ?>
-							<li><a href="adm_product.php">AdministRation</a></li>
+							<li><a href="adm_product.php">Gérer les produits</a></li>
 							<?php endif; ?>
 						</ul> 
 						<?php if ($admin) : ?>
