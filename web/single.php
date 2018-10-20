@@ -9,8 +9,8 @@ if ($product != null):
 	<div class="breadcrumbs">
 		<div class="container">
 			<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
-				<li><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
-				<li class="active">Single page</li>
+				<li><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Accueil</a></li>
+				<li class="active"><?=htmlspecialchars($product['name'])?></li>
 			</ol>
 		</div>
 	</div>
@@ -43,21 +43,21 @@ if ($product != null):
 							<input id="rating1" type="radio" name="rating" value="1">
 							<label for="rating1">1</label>
 						</span>
-						<p>5.00 out of 5</p>
-						<a href="#">Add Your Review</a>
+						<p>5.00 sur 5</p>
+						<a href="#">Ajouter un avis</a>
 					</div>
 					<h6 class="item_price"><?=htmlspecialchars($product['price'])?> €</h6>			
 					<p><?=htmlspecialchars($product['description'])?></p>
 					<ul class="size">
-						<h4>Size</h4>
+						<h4>Taille</h4>
 						<li><a href="#"><?=htmlspecialchars($product['size'])?></a></li>
 					</ul>
 					<div class="clearfix"> </div>
 					<div class="quantity">
-						<p class="qty"> Qty :  </p><input min="1" type="number" value="1" class="item_quantity">
+						<p class="qty"> Quantitée disponible :  </p><input min="1" type="number" value="1" class="item_quantity">
 					</div>
 					<div class="btn_form">
-						<a href="#" class="add-cart item_add">ADD TO CART</a>	
+						<a href="#" class="add-cart item_add">Ajouter au chariot</a>	
 					</div>
 				</div>
 			   <div class="clearfix"> </div>
@@ -83,7 +83,7 @@ if ($product != null):
 						<div class="panel-heading" role="tab" id="headingTwo">
 							<h4 class="panel-title">
 								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-								   additional information
+								   Informations supplémentaires
 								</a>
 							</h4>
 						</div>
@@ -97,7 +97,7 @@ if ($product != null):
 						<div class="panel-heading" role="tab" id="headingThree">
 							<h4 class="panel-title">
 								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-									reviews (5)
+									Avis (5)
 								</a>
 							</h4>
 						</div>
@@ -111,7 +111,7 @@ if ($product != null):
 						<div class="panel-heading" role="tab" id="headingFour">
 							<h4 class="panel-title">
 								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-									help
+									Aide
 								</a>
 							</h4>
 						</div>
