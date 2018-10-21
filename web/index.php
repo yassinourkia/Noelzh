@@ -7,14 +7,14 @@ require_once('../Products/products.php');
 		<div class="container">
 			<div class="banner-text">			
 				<div class="col-sm-5 banner-left wow fadeInLeft animated" data-wow-delay=".5s">			
-					<h2>On Entire Fashion range</h2>
-					<h3>Coming Soon </h3>
-					<h4>Our New Designs</h4>
+					<h2>Notre collection</h2>
+					<h3>Bientôt</h3>
+					<h4>Nos nouveautés</h4>
 					<div class="count main-row">
 						<ul id="example">
-							<li><span class="hours">00</span><p class="hours_text">Hours</p></li>
+							<li><span class="hours">00</span><p class="hours_text">Heures</p></li>
 							<li><span class="minutes">00</span><p class="minutes_text">Minutes</p></li>
-							<li><span class="seconds">00</span><p class="seconds_text">Seconds</p></li>
+							<li><span class="seconds">00</span><p class="seconds_text">Secondes</p></li>
 						</ul>
 							<div class="clearfix"> </div>
 							<script type="text/javascript" src="js/jquery.countdown.min.js"></script>
@@ -83,8 +83,8 @@ require_once('../Products/products.php');
 					<a href="single.php?pid=<?=$p['id']?>"><img src="../Products/image.php?id=<?=urlencode($p['id'])?>" class="img-responsive"/></a>
 					<div class="gallery-text simpleCart_shelfItem">
 						<h5><a class="name" href="single.php?pid=<?=$p['id']?>"><?=htmlspecialchars($p['name'])?></a></h5>
-						<p><span class="item_price">100$</span></p>
-						<h4 class="sizes">Sizes: <a href="#"> s</a> - <a href="#">m</a> - <a href="#">l</a> - <a href="#">xl</a> </h4>
+						<p><span class="item_price"><?=htmlspecialchars($p['price'])?> €</span></p>
+						<h4 class="sizes">Taille: <a href="#"><?=htmlspecialchars($p['size'])?></a> </h4>
 						<ul>
 							<li><a href="#"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
 							<li><a class="item_add" href="#"><span class="glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
@@ -110,8 +110,8 @@ require_once('../Products/products.php');
 									<img src="images/t1.png" alt=""/>
 								</div>
 								<div class="col-md-7 trend-right">
-									<h4>TOP 10 TRENDS <span>FOR YOU</span></h4>
-									<h5>Flat 20% OFF</h5>
+									<h4>Le meilleur <span>POUR VOUS</span></h4>
+									<h5>20% de reduction</h5>
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus, justo ac volutpat vestibulum, dolor massa pharetra nunc, nec facilisis lectus nulla a tortor. Duis ultrices nunc a nisi malesuada suscipit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam eu bibendum felis. Sed viverra dapibus tincidunt.</p>
 								</div>
 								<div class="clearfix"></div>
@@ -121,8 +121,8 @@ require_once('../Products/products.php');
 									<img src="images/t2.png" alt=""/>
 								</div>
 								<div class="col-md-7 trend-right">
-									<h4>TOP 10 TRENDS <span>FOR YOU</span></h4>
-									<h5>Flat 20% OFF</h5>
+									<h4>Le meilleur <span>POUR VOUS</span></h4>
+									<h5>20% de reduction</h5>
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus, justo ac volutpat vestibulum, dolor massa pharetra nunc, nec facilisis lectus nulla a tortor. Duis ultrices nunc a nisi malesuada suscipit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam eu bibendum felis. Sed viverra dapibus tincidunt.</p>
 								</div>
 								<div class="clearfix"></div>
@@ -132,8 +132,8 @@ require_once('../Products/products.php');
 									<img src="images/t3.png" alt=""/>
 								</div>
 								<div class="col-md-7 trend-right">
-									<h4>TOP 10 TRENDS <span>FOR YOU</span></h4>
-									<h5>Flat 20% OFF</h5>
+									<h4>Le meilleur <span>POUR VOUS</span></h4>
+									<h5>20% de reduction</h5>
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus, justo ac volutpat vestibulum, dolor massa pharetra nunc, nec facilisis lectus nulla a tortor. Duis ultrices nunc a nisi malesuada suscipit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam eu bibendum felis. Sed viverra dapibus tincidunt.</p>
 								</div>
 								<div class="clearfix"></div>
@@ -143,8 +143,8 @@ require_once('../Products/products.php');
 									<img src="images/t4.png" alt=""/>
 								</div>
 								<div class="col-md-7 trend-right">
-									<h4>TOP 10 TRENDS <span>FOR YOU</span></h4>
-									<h5>Flat 20% OFF</h5>
+									<h4>Le meilleur <span>POUR VOUS</span></h4>
+									<h5>20% de reduction</h5>
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus, justo ac volutpat vestibulum, dolor massa pharetra nunc, nec facilisis lectus nulla a tortor. Duis ultrices nunc a nisi malesuada suscipit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam eu bibendum felis. Sed viverra dapibus tincidunt.</p>
 								</div>
 								<div class="clearfix"></div>

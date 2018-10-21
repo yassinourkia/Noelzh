@@ -7,8 +7,8 @@ require('../Products/groups.php');
 	<div class="breadcrumbs">
 		<div class="container">
 			<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
-				<li><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
-				<li class="active">Products</li>
+				<li><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Accueil</a></li>
+				<li class="active">Produits</li>
 			</ol>
 		</div>
 	</div>
@@ -23,9 +23,9 @@ require('../Products/groups.php');
 						<a href="single.php?pid=<?=$product['id']?>"><img src="../Products/image.php?id=<?=urlencode($product['id'])?>" class="img-responsive"/></a>
 						<div class="new-text">
 							<ul>
-								<li><a href="single.php?pid=<?=$product['id']?>">Quick View </a></li>
+								<li><a href="single.php?pid=<?=$product['id']?>">Voir les details </a></li>
 								<li><input type="number" class="item_quantity" min="1" value="1"></li>
-								<li><a class="item_add" href=""> Add to cart</a></li>
+								<li><a class="item_add" href="">Ajouter au panier</a></li>
 							</ul>
 						</div>
 					</div>
@@ -55,21 +55,21 @@ require('../Products/groups.php');
 			<div class="col-md-3 rsidebar">
 				<div class="rsidebar-top">
 					<div class="slider-left">
-						<h4>Filter By Price</h4>            
-						<div id="slider-range"></div>							
-						<input type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal;" />
+						<h4>Filtrer par prix</h4>
+						<input type="text" id="amount"/>
+						<div id="slider-range"></div>
 						<!---->
 						<script type='text/javascript'>//<![CDATA[ 
 							$(window).load(function(){
 							 $( "#slider-range" ).slider({
 										range: true,
 										min: 0,
-										max: 9000,
-										values: [ 1000, 7000 ],
-										slide: function( event, ui ) {  $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+										max: 100,
+										values: [ 0, 100 ],
+										slide: function( event, ui ) {  $( "#amount" ).val( "€" + ui.values[ 0 ] + " - €" + ui.values[ 1 ] );
 										}
 							 });
-							$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+							$( "#amount" ).val( "€" + $( "#slider-range" ).slider( "values", 0 ) + " - €" + $( "#slider-range" ).slider( "values", 1 ) );
 
 							});//]]>  
 						</script>
@@ -77,78 +77,25 @@ require('../Products/groups.php');
 						<!---->
 					</div>
 					<div class="sidebar-row">
-						<h4> Clothes & Shoes </h4>
-						<ul class="faq">
-							<li class="item1"><a href="#">Frocks & Dresses<span class="glyphicon glyphicon-menu-down"></span></a>
-								<ul>
-									<li class="subitem1"><a href="#">Party Wear</a></li>										
-									<li class="subitem1"><a href="#">Night Wear</a></li>										
-									<li class="subitem1"><a href="#">Bath Time</a></li>										
-								</ul>
-							</li>
-							<li class="item2"><a href="#">Shorts & Jeans<span class="glyphicon glyphicon-menu-down"></span></a>
-								<ul>
-									<li class="subitem1"><a href="#">Girls</a></li>										
-									<li class="subitem1"><a href="#">Boys</a></li>										
-									<li class="subitem1"><a href="#">Baby by age</a></li>										
-								</ul>
-							</li>
-							<li class="item3"><a href="#">Protection <span class="glyphicon glyphicon-menu-down"></span></a>
-								<ul>
-									<li class="subitem1"><a href="#">Sweaters</a></li>										
-									<li class="subitem1"><a href="#">Rain Jackets</a></li>										
-									<li class="subitem1"><a href="#">Caps & Gloves</a></li>										
-								</ul>
-							</li>
-						</ul>
-						<!-- script for tabs -->
-						<script type="text/javascript">
-							$(function() {
-							
-								var menu_ul = $('.faq > li > ul'),
-									   menu_a  = $('.faq > li > a');
-								
-								menu_ul.hide();
-							
-								menu_a.click(function(e) {
-									e.preventDefault();
-									if(!$(this).hasClass('active')) {
-										menu_a.removeClass('active');
-										menu_ul.filter(':visible').slideUp('normal');
-										$(this).addClass('active').next().stop(true,true).slideDown('normal');
-									} else {
-										$(this).removeClass('active');
-										$(this).next().stop(true,true).slideUp('normal');
-									}
-								});
-							
-							});
-						</script>
-						<!-- script for tabs -->
-					</div>
-					<div class="sidebar-row">
-						<h4>DISCOUNTS</h4>
-						<div class="row row1 scroll-pane">
-							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Upto - 10% (20)</label>
+						<h4>RÉDUCTIONS</h4>
+						<div class="row row1">
 							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>70% - 60% (5)</label>
 							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>50% - 40% (7)</label>
 							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>30% - 20% (2)</label>
 							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>10% - 5% (5)</label>
-							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>30% - 20% (7)</label>
-							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>10% - 5% (2)</label>
-							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Other(50)</label>
 						</div>
 					</div>
 					<div class="sidebar-row">
-						<h4>Color</h4>
+						<h4>COULEURS</h4>
 						<div class="row row1 scroll-pane">
-							<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>White</label>
-							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Pink</label>
-							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Gold</label>
-							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Silver</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Blanc</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rose</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Or</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Argent</label>
 						</div>
 					</div>			 
 				</div>
+				<!--
 				<div class="gallery-grid ">
 					<h6>YOU MAY ALSO LIKE</h6>
 					<a href="single.php"><img src="images/b1.png" class="img-responsive" alt=""/></a>
@@ -163,6 +110,7 @@ require('../Products/groups.php');
 						</ul>
 					</div>
 				</div>
+				-->
 			</div>
 			<div class="clearfix"> </div>
 		</div>

@@ -79,12 +79,12 @@ $(window).load(function() {
 				<?php
 					if(isset($_SESSION['user_id']) && isset($_SESSION['user_name']))
 						echo '<div class="nav navbar-nav wow fadeInLeft animated" data-wow-delay=".5s">
-								<p>Welcome to Modern Shoppe <a href="web/profile.html">'.$_SESSION['user_name'].' </a></p>
-								<a href="../login/logout.php" >Logout </a>
+								<p>Bienvenue chez Noelzh <a href="web/profile.html">'.$_SESSION['user_name'].' </a></p>
+								<a href="../login/logout.php" >Se déconnecter </a>
 							</div>';
 					else 
 						echo '<div class="nav navbar-nav wow fadeInLeft animated" data-wow-delay=".5s">
-								<p>Welcome to Modern Shoppe <a href="register.php">Register </a> Or <a href="signin.php">Sign In </a></p>
+								<p>Bienvenue chez Noelzh ! <a href="register.php">Créer un compte </a> - <a href="signin.php">Se Connecter</a></p>
 							</div>';
 				?>
 				<div class="nav navbar-nav navbar-right social-icons wow fadeInRight animated" data-wow-delay=".5s">
@@ -105,15 +105,15 @@ $(window).load(function() {
 				<div class="nav navbar-nav header-two-left">
 					<ul>
 						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 892</li>
-						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">mail@example.com</a></li>			
+						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">support@noelzh.com</a></li>			
 					</ul>
 				</div>
 				<div class="nav navbar-nav logo wow zoomIn animated" data-wow-delay=".7s">
-					<h1><a href="index.php">Noelzh<span class="tag">Everything for Christmas </span> </a></h1>
+					<h1><a href="index.php">Noelzh<span class="tag">Tout ce qu'il vous faut pour un Noël réussi </span> </a></h1>
 				</div>
 				<div class="nav navbar-nav navbar-right header-two-right">
 					<div class="header-right my-account">
-						<a href="contact.php"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> CONTACT US</a>						
+						<a href="contact.php"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Nous contacter</a>						
 					</div>
 					<div class="header-right cart">
 						<a href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
@@ -121,7 +121,7 @@ $(window).load(function() {
 								<span class="simpleCart_total"> $0.00 </span> (<span id="simpleCart_quantity" class="simpleCart_quantity"> 0 </span>) 
 						</a></h4>
 						<div class="cart-box">
-							<p><a href="javascript:;" class="simpleCart_empty">Empty cart</a></p>
+							<p><a href="javascript:;" class="simpleCart_empty">Vider le panier</a></p>
 							<div class="clearfix"> </div>
 						</div>
 					</div>
@@ -135,7 +135,7 @@ $(window).load(function() {
 				<nav class="navbar" role="navigation">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-							<span class="sr-only">Toggle navigation</span>
+							<span class="sr-only">Voir les options de navigation</span>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
@@ -174,7 +174,7 @@ $(window).load(function() {
 										<div class="col-sm-8 menu-grids">
 											<a href="products.php">
 												<div class="new-add">
-													<h5>30% OFF <br> Today Only</h5>
+													<h5>30% DE REDUCTION <br> Aujourd'hui seulement</h5>
 												</div>	
 											</a>
 										</div>	
@@ -186,7 +186,7 @@ $(window).load(function() {
 							
 							<li><a href="products.php">Autre</a></li>
 							<?php if ($admin) : ?>
-							<li><a href="adm_product.php">PRODUCT ADMIN</a></li>
+							<li><a href="adm_product.php">Gérer les produits</a></li>
 							<?php endif; ?>
 						</ul> 
 						<?php if ($admin) : ?>
@@ -207,7 +207,7 @@ $(window).load(function() {
 				</nav>
 				<div id="cd-search" class="cd-search">
 					<form>
-						<input type="search" placeholder="Search...">
+						<input type="search" placeholder="Rechercher...">
 					</form>
 				</div>
 			</div>
