@@ -69,4 +69,13 @@ create table ratings (
     foreign key (id_users) references users(id)
 );
 
+drop table if exists messages;
+create table messages (
+	id			int primary key auto_increment,
+	id_users	int not null,
+    date		datetime default current_timestamp,
+    message		varchar(500) not null,
+    foreign key (id_users) references users(id)
+);
+
 COMMIT;
