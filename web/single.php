@@ -104,10 +104,28 @@ if ($product != null):
 								</a>
 							</h4>
 						</div>
+
+						
 						<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-							<div class="panel-body">
-								Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+							<div class="panel panel-default">
+								<div class="panel-heading">Poster vos commentaires</div>
+								  <div class="panel-body">
+								  	<form method="post" action="../Comment/postcomment.php">
+								  	  <div class="form-group">
+									    <label for="user_name">Nom </label>
+									    <input type="text" value ="<?php echo $_SESSION['user_name'].'-:'.$_SESSION['user_id']; $_SESSION["id_products"] = $product['id'];?>" name="name" class="form-control" id="user_name" disabled />
+									  </div>
+									  <div class="form-group">
+									    <label for="exampleInputPassword1">Commentaire</label>
+									    <textarea name="contenu" class="form-control" rows="3"></textarea>
+									  </div>
+									  <input type="submit" name="send" value="Envoyer" class="btn btn-primary">
+									</form>
+								  </div>
 							</div>
+							<?php  
+                            	include_once("../Comment/commentlist.php");
+							?>
 						</div>
 					</div>
 					<div class="panel panel-default wow fadeInUp animated" data-wow-delay=".8s">
