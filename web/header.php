@@ -79,7 +79,7 @@ $(window).load(function() {
 				<?php
 					if(isset($_SESSION['user_id']) && isset($_SESSION['user_name']))
 						echo '<div class="nav navbar-nav wow fadeInLeft animated" data-wow-delay=".5s">
-								<p>Bienvenue chez Noelzh <a href="web/profile.html">'.$_SESSION['user_name'].' </a></p>
+								<p>Bienvenue chez Noelzh <a href="profil.php">'.$_SESSION['user_name'].' </a></p>
 								<a href="../login/logout.php" >Se déconnecter </a>
 							</div>';
 					else 
