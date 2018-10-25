@@ -41,8 +41,7 @@ if(isset($_POST["login"]))
            
             $result = $statement->fetchAll();
             foreach($result as $row)
-            {
-                
+            {                
                     if(password_verify($_POST["user_password"], $row["password"]))
                     //if($row["password"] == $_POST["user_password"])
                     {
@@ -56,14 +55,14 @@ if(isset($_POST["login"]))
                     }
                     else
                     {
-                        $message = "<label>Wrong Password</label>";
-                        echo $message;
+                        $message = "Mot de passe erroné";
+                        header("location:../web/signin.php?message=$message");
                     }
             }
         }
         else
         {
-            $message = "Wrong Email Address";
+            $message = "Email inconnue";
             header("location:../web/signin.php?message=$message");
         }
     }
