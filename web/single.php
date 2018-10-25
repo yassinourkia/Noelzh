@@ -100,7 +100,7 @@ if ($product != null):
 						<div class="panel-heading" role="tab" id="headingThree">
 							<h4 class="panel-title">
 								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-									Avis (5)
+									Avis (<?php include_once('../Comment/ratingcount.php');?>)
 								</a>
 							</h4>
 						</div>
@@ -113,7 +113,17 @@ if ($product != null):
 								  	<form method="post" action="../Comment/postcomment.php">
 								  	  <div class="form-group">
 									    <label for="user_name">Nom </label>
-									    <input type="text" value ="<?php echo $_SESSION['user_name'].'-:'.$_SESSION['user_id']; $_SESSION["id_products"] = $product['id'];?>" name="name" class="form-control" id="user_name" disabled />
+									    <input type="text" value ="<?php echo $_SESSION['user_name'];?>" name="name" class="form-control" id="user_name" disabled />
+									  </div>
+									  <div class="form-group">
+									    <label for="rating">Note </label>
+									    <select name="rating" id="rating">
+										  <option value="5">5</option>
+										  <option value="4">4</option>
+										  <option value="3">3</option>
+										  <option value="2">2</option>
+										  <option value="1">1</option>
+										</select>
 									  </div>
 									  <div class="form-group">
 									    <label for="exampleInputPassword1">Commentaire</label>
