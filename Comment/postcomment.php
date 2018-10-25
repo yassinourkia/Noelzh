@@ -11,7 +11,7 @@ session_start();
 /**
  * Include our MySQL connection.
  */
-require '../connect.php';
+require_once '../connect.php';
 if(! isset($_SESSION['user_id']))
 {
     header("location:../web/login.php");
@@ -21,8 +21,9 @@ else
 	if(isset($_POST["send"]))
 	{
 		echo "here";
-		if( isset($_POST["contenu"]) && isset($_SESSION['id_products']) && isset($_SESSION['user_id']) )
+		if( isset($_POST["contenu"]) && isset($_POST["rating"]) && isset($_SESSION['id_products']) && isset($_SESSION['user_id']) )
 	    {
+
     		
     		$insert_query = "
 				INSERT INTO `ratings` (`id`, `text`, `rating`, `id_products`, `id_users`) VALUES (NULL, :contenu, :rating, :id_products,:id_users)
@@ -31,7 +32,7 @@ else
 				$statement->execute(
 					array(
 						':contenu'			=>	$_POST['contenu'],
-						':rating'			=>	4,
+						':rating'			=>	$_POST['rating'],
 						':id_products'		=>	$_SESSION['id_products'],
 						':id_users'			=>	$_SESSION['user_id']	
 					)

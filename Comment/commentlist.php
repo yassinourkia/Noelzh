@@ -10,4 +10,12 @@
 		echo '<tr class="active"> <td>Nom </td><td> '.$row["name"].'</td></tr><tr><td>Commentaire </td><td> '.$row["text"].'</td></tr>';
 	}
 	echo '</table></div>' ;
+
+
+		$stmt2 = $connect->query("SELECT count(*)  as count FROM ratings  ");
+		$row = $stmt2->fetch();
+		$count = $row['count'];
+		
+	
+	
 ?>
