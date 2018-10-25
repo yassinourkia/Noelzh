@@ -1,12 +1,16 @@
 <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 $admin = isset($_SESSION['admin_id']) ? $_SESSION['admin_id']: false;
+
 require_once('groups.php');
 
 include_once('../connect.php');
 $dbh = $connect;
 
 $r_product_select = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description from products p where p.id=:id_produit');
-$r_product_random_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description from products p where p.quantity >= 0 order by rand() limit 4');
+$r_product_random_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description from products p where p.quantity >= 0 order by rand() limit :nb');
 $r_product_nocat_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description from products p where p.quantity >= 0  and p.id not in (select id_products from a_products_categories)');
 $r_product_cat_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description from products p inner join a_products_categories a on a.id_products=p.id inner join categories c on c.id=a.id_categories where c.name=:cat and p.quantity >= 0');
 $r_product_insert = $dbh->prepare('insert into products (name, price, quantity, size, description, picture) values (:nom, :prix, :quantite, :taille, :description, :image)');
@@ -18,12 +22,25 @@ $r_product_add_cat = $dbh->prepare('insert into a_products_categories (id_catego
 $r_product_rem_cat = $dbh->prepare('delete from a_products_categories where id_categories = (select id from categories where name=:cat_name limit 1) and id_products=:id_produit');
 
 
-function random_products() {
+/**
+ * Create a list of random products
+ * 
+ * @param nb number of products to select
+ * @return an array [[0] -> ['name'->'Truc', 'price'->'24.3', 'quantity'->'4', size->'M', 'descritpion'->'Mon ...'], ...]
+ */
+function random_products($nb = 4) {
 	global $r_product_random_list;
+	$r_product_random_list->bindParam(':nb', $nb);
 	$r_product_random_list->execute();
 	return $r_product_random_list->fetchAll();
 }
 
+/**
+ * Get a particular product
+ * 
+ * @param id product id 
+ * @return  an array ['name'->'Truc', 'price'->'24.3', 'quantity'->'4', size->'M', 'descritpion'->'Mon ...']
+ */
 function product($id) {
 	global $r_product_select;
 	$r_product_select->bindParam(':id_produit', $id, PDO::PARAM_INT);
@@ -31,6 +48,10 @@ function product($id) {
 	return $r_product_select->fetch();
 }
 
+
+/**
+ * Path to add a new product
+ */
 if ($admin && isset($_POST['nom_produit']) && !isset($_POST['mod_id'])) {
 	$nom = $_POST['nom_produit'];
 	$prix = (int) $_POST['prix'];
@@ -46,15 +67,22 @@ if ($admin && isset($_POST['nom_produit']) && !isset($_POST['mod_id'])) {
 	$r_product_insert->bindParam(':image', $image);
 	$r_product_insert->execute();
 	$p_id = $dbh->lastInsertId();
-	$cat = $_POST['group'];
-	foreach ($cat as $cat_name) {
-		$cn = urldecode($cat_name);
-		$r_product_add_cat->bindParam(':cat_name', $cn);
-		$r_product_add_cat->bindParam(':id_produit', $p_id);
-		$r_product_add_cat->execute();
+	
+	if (isset($_POST['group'])) { // Adding the product to categories
+		$cat = $_POST['group'];
+		foreach ($cat as $cat_name) {
+			$cn = urldecode($cat_name);
+			$r_product_add_cat->bindParam(':cat_name', $cn);
+			$r_product_add_cat->bindParam(':id_produit', $p_id);
+			$r_product_add_cat->execute();
+		}
 	}
 }
 
+/**
+ * Path to modify a product
+ * The image is optional
+ */
 if ($admin && isset($_POST['nom_produit']) && isset($_POST['mod_id'])) {
 	$id = $_POST['mod_id'];
 	$nom = $_POST['nom_produit'];
@@ -97,21 +125,23 @@ if ($admin && isset($_POST['nom_produit']) && isset($_POST['mod_id'])) {
 	
 }
 
-
+/**
+ * Path to delete a product
+ */
 if ($admin && isset($_POST['id_p_supprimer'])) {
 	$id = $_POST['id_p_supprimer'];
 	$prev_cat = get_categories($id);
 	
-	foreach ($prev_cat as $cat_name) {
+	foreach ($prev_cat as $cat_name) { // removing the product from its categories
 			$cn = $cat_name;
 			$r_product_rem_cat->bindParam(':cat_name', $cn);
 			$r_product_rem_cat->bindParam(':id_produit', $id);
 			$r_product_rem_cat->execute();
 	}
-	try {
+	try { // try to delete the product
 		$r_product_delete->bindParam(':id', $id);
 		$r_product_delete->execute();
-	} catch (Exception $e) {
+	} catch (Exception $e) { // The product cannot be deleted, making it unavailable
 		$r_product_unavailable->bindParam(':id', $id);
 		$r_product_unavailable->execute();
 	}

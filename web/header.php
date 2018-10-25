@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include_once('../Products/groups.php');
+	require_once('../Products/groups.php');
 ?>
 <!--
 Author: W3layouts
@@ -146,7 +146,7 @@ $(window).load(function() {
 						<ul class="nav navbar-nav top-nav-info">
 							<li><a href="index.php">Accueil</a></li>
 							
-							<?php foreach ($groups as $key => $group): ?>
+							<?php foreach (get_header_categories() as $key => $group): ?>
 							<li class="dropdown grid">
 								<a href="#" class="dropdown-toggle list1" data-toggle="dropdown"><?=htmlspecialchars($key)?><b class="caret"></b></a>
 								<ul class="dropdown-menu multi-column menu-two multi-column3">
