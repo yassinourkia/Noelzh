@@ -7,16 +7,24 @@ $dbh = $connect;
 $r_categorie_list = $dbh->prepare('select c.name, count(id_products) as n_members from a_products_categories a right join categories c on c.id=a.id_categories group by c.name');
 $r_categorie_insert = $dbh->prepare('insert into categories (name) values (:nom)');
 $r_categorie_delete = $dbh->prepare('delete from categories where name=:nom');
+$r_categorie_list_for_product = $dbh->prepare('select c.name from a_products_categories a inner join categories c on c.id=a.id_categories where a.id_products=:id');
 
+
+function get_categories($id) {
+	global $r_categorie_list_for_product;
+	$r_categorie_list_for_product->bindParam(':id', $id);
+	$r_categorie_list_for_product->execute();
+	return array_keys($r_categorie_list_for_product->fetchAll(PDO::FETCH_GROUP));
+}
 
 if ($admin && isset($_POST['nom_supprimer'])) {
 	$nom = base64_decode($_POST['nom_supprimer']);
 	$r_categorie_delete->bindParam(':nom', $nom);
 	$res = $r_categorie_delete->execute();
 	if (! $res) {
-		echo 'Imposible de supprimer '.$nom;
+		echo 'Impossible de supprimer '.$nom;
 	} else {
-		echo 'Deleted '.$nom;
+		echo 'Supprimer '.$nom;
 		header('Location: ../web');
 	}
 }

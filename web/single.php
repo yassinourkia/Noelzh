@@ -54,10 +54,13 @@ if ($product != null):
 					</ul>
 					<div class="clearfix"> </div>
 					<div class="quantity">
-						<p class="qty"> Quantité disponible :  </p><input min="1" type="number" value="1" class="item_quantity">
+						<p class="qty"> Quantité :  </p><input min="1" type="number" value="1" class="item_quantity">
 					</div>
 					<div class="btn_form">
-						<a href="#" class="add-cart item_add">Ajouter au panier</a>	
+						<a href="#" class="add-cart item_add">Ajouter au panier</a>
+						<?php if ($admin): ?>
+						<a href="adm_product.php?mod_id=<?=urlencode($product['id'])?>" class="btn btn-info">Modifier</a>
+						<?php endif; ?>
 					</div>
 				</div>
 			   <div class="clearfix"> </div>

@@ -1,7 +1,7 @@
 <?php
 require_once('header.php');
-require('../Products/products.php');
-require('../Products/groups.php');
+require_once('../Products/products.php');
+require_once('../Products/groups.php');
 ?>
 	<!--breadcrumbs-->
 	<div class="breadcrumbs">
