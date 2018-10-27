@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	require_once('../Products/groups.php');
+	require_once('../Products/panier.php');
 ?>
 <!--
 Author: W3layouts
@@ -116,12 +117,15 @@ $(window).load(function() {
 						<a href="contact.php"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Nous contacter</a>						
 					</div>
 					<div class="header-right cart">
+					<?php $panier_info = panier_get_info(); ?>
 						<a href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
 						<h4><a href="checkout.php">
-								<span class="simpleCart_total"> $0.00 </span> (<span id="simpleCart_quantity" class="simpleCart_quantity"> 0 </span>) 
+								<span class="simpleCart_total"> <?=round($panier_info['price'], 2)?> €</span> (<span id="simpleCart_quantity" class="simpleCart_quantity"> <?=$panier_info['nb']?> </span>) 
 						</a></h4>
 						<div class="cart-box">
-							<p><a href="javascript:;" class="simpleCart_empty">Vider le panier</a></p>
+							<form action="../Products/panier.php" method="post">
+								<input type="submit" name="panier_clear" value="Vider le panier" class="simpleCart_empty">
+							</form>
 							<div class="clearfix"> </div>
 						</div>
 					</div>

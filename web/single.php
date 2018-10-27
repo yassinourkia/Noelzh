@@ -53,15 +53,18 @@ if ($product != null):
 						<li><a href="#"><?=htmlspecialchars($product['size'])?></a></li>
 					</ul>
 					<div class="clearfix"> </div>
+					<form method="post" action="../Products/panier.php">
+					<input type="hidden" name="panier_item_id" value="<?=urlencode($product['id'])?>"/> 
 					<div class="quantity">
-						<p class="qty"> Quantité :  </p><input min="1" type="number" value="1" class="item_quantity">
+						<p class="qty"> Quantité :  </p><input min="1" type="number" value="1" class="item_quantity" name="panier_qty">
 					</div>
 					<div class="btn_form">
-						<a href="#" class="add-cart item_add">Ajouter au panier</a>
+						<input type="submit" class="btn btn-info" name="panier_add" value="Ajouter au panier"/>
 						<?php if ($admin): ?>
 						<a href="adm_product.php?mod_id=<?=urlencode($product['id'])?>" class="btn btn-info">Modifier</a>
 						<?php endif; ?>
 					</div>
+					</form>
 				</div>
 			   <div class="clearfix"> </div>
 			</div>

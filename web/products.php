@@ -22,11 +22,14 @@ require_once('../Products/groups.php');
 					<div class="new-top">
 						<a href="single.php?pid=<?=$product['id']?>"><img src="../Products/image.php?id=<?=urlencode($product['id'])?>" class="img-responsive"/></a>
 						<div class="new-text">
+						<form method="post" action="../Products/panier.php">
+						<input type="hidden" name="panier_item_id" value="<?=urldecode($product['id'])?>"/> 
 							<ul>
 								<li><a href="single.php?pid=<?=$product['id']?>">Voir les details </a></li>
-								<li><input type="number" class="item_quantity" min="1" value="1"></li>
-								<li><a class="item_add" href="">Ajouter au panier</a></li>
+								<li><input type="number" name="panier_qty" class="item_quantity" min="1" value="1"></li>
+								<li><input type="submit" name="panier_add" value="Ajouter au panier" class="item_quantity item_add"/></li>
 							</ul>
+						</form>
 						</div>
 					</div>
 					<div class="new-bottom">
