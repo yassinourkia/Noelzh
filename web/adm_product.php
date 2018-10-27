@@ -46,7 +46,7 @@ if (isset($_GET['mod_id'])) {
 			<label for="description">Description</label>
 			<textarea name="description" class="form-control" placeholder="Description du produit" maxlength="149"><?=isset($p['description'])?$p['description']:''?></textarea>
 		</div>
-		<?php foreach ($groups_raw as $group): ?>
+		<?php foreach (get_raw_categories() as $group): ?>
 		<div class="form-check">
 			<input class="form-check-input" type="checkbox" name="group[]" value="<?=urlencode($group['name'])?>" <?php if (in_array($group['name'], $cat)) echo 'checked'?>></input>
 			<label class="form-check-label" for="group[]"><?=htmlspecialchars($group['name'])?></label>

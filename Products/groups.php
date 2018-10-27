@@ -26,6 +26,17 @@ function get_categories($id) {
 }
 
 /**
+ * Get all categories
+ *
+ * @return an array ['cat1', 'cat1subcat1', 'cat1subcat2', ...]
+ */
+function get_raw_categories() {
+	global $r_categorie_list;
+	$r_categorie_list->execute();
+	return $r_categorie_list->fetchAll();
+}
+
+/**
  * Get all categories in a tree representation
  * 
  * @return an array ['cat1' -> ['subcat1', 'subcat2'], 'cat2' -> [], ...]
