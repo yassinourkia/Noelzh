@@ -1,9 +1,11 @@
 <?php
+/**
+ * This file define functions and paths to deal with the panier fonctionality.
+ * The panier is stored in a php session, it is available for every user (authentificated or not).
+ */
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-$admin = isset($_SESSION['admin_id']) ? $_SESSION['admin_id']: false;
-
 
 require_once('products.php');
 include_once('../connect.php');
@@ -15,7 +17,14 @@ if (! isset($panier))
 	$panier = array();
 
 
-function panier_add($id, $nb) {
+/**
+ * Add a product to the panier
+ * if the product is already in the panier, increase the number of product
+ * 
+ * @param id the id of the product to add
+ * @param nb how many product to add
+ */
+function panier_add($id, $nb=1) {
 	global $panier;
 	$found = false;
 	
@@ -29,6 +38,11 @@ function panier_add($id, $nb) {
 		$panier[] = array('id' => $id, 'nb' => $nb);
 }
 
+/**
+ * Remove a product from the panier
+ * 
+ * @param id the id of the product to remove
+ */
 function panier_remove($id) {
 	global $panier;
 	foreach ($panier as $key => $item) {
@@ -37,10 +51,18 @@ function panier_remove($id) {
 	}
 }
 
+/**
+ * Remove every product from the panier.
+ */
 function panier_clear() {
 	$_SESSION['panier'] = array();
 }
 
+/**
+ * Get the list of products in the panier.
+ *
+ * @return an array [[['product'] -> ['id' -> 1, 'name'-> 'toto', ...], ['nb'] -> 2], ...]
+ */
 function panier_get_products() {
 	global $panier;
 	$ret = array();
@@ -52,6 +74,11 @@ function panier_get_products() {
 	return $ret;
 }
 
+/**
+ * Get the total price and the number of items in the panier.
+ *
+ * @return an array ['nb' -> 3, 'price' -> 45]
+ */
 function panier_get_info() {
 	$prod = panier_get_products();
 	$ret = array();
@@ -60,18 +87,27 @@ function panier_get_info() {
 	return $ret;
 }
 
+/**
+ * Path to add an item to the panier
+ */
 if (isset($_POST['panier_add'])) {
 	panier_add((int)$_POST['panier_item_id'], (int)$_POST['panier_qty']);
 	header('Location: '.$_SERVER['HTTP_REFERER']);
 }
 
+/**
+ * Path to remove an item from the panier
+ */
+if (isset($_POST['panier_remove'])) {
+	panier_remove((int)$_POST['panier_item_id']);
+	header('Location: '.$_SERVER['HTTP_REFERER']);
+}
+
+/**
+ * Path to clear all item from the panier
+ */
 if (isset($_POST['panier_clear'])) {
 	panier_clear();
 	header('Location: '.$_SERVER['HTTP_REFERER']);
 }
-/*
-print_r(panier_get_products());
-echo '<br/>';
-print_r(panier_get_info());
-*/
 ?>

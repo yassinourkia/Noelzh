@@ -1761,6 +1761,7 @@ h4.panel-title a {
     -o-transition: color 0.2s ease-in-out;
     transition: color 0.2s ease-in-out;
     z-index: 999;
+    border: unset;
 }
 ul.qty{
 	padding:0;

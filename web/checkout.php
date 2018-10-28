@@ -1,5 +1,10 @@
 <?php
 require_once('header.php');
+require_once('../Products/panier.php');
+
+$pan = panier_get_info();
+$pan_products = panier_get_products();
+$logged = isset($_SESSION['user_id']);
 ?>
 	<!--breadcrumbs-->
 	<div class="breadcrumbs">
@@ -14,70 +19,43 @@ require_once('header.php');
 	<!--cart-items-->
 	<div class="cart-items">
 		<div class="container">
-			<h3 class="wow fadeInUp animated" data-wow-delay=".5s">My Shopping Cart(3)</h3>
+			<h3 class="wow fadeInUp animated" data-wow-delay=".5s">Mon Panier  (<?=$pan['nb']?>)</h3>
+			<?php foreach ($pan_products as $item): ?> 
 			<div class="cart-header wow fadeInUp animated" data-wow-delay=".5s">
-				<div class="alert-close"> </div>
+				<form method="post" action="../Products/panier.php">
+					<input type="hidden" name="panier_item_id" value="<?=urlencode($item['product']['id'])?>">
+					<input type="submit" name="panier_remove" class="alert-close" value=""/>
+				</form>
 				<div class="cart-sec simpleCart_shelfItem">
 					<div class="cart-item cyc">
-						<a href="single.php"><img src="images/g1.jpg" class="img-responsive" alt=""></a>
+						<a href="single.php?pid=<?=$item['product']['id']?>"><img src="../Products/image.php?id=<?=urlencode($item['product']['id'])?>" class="img-responsive"/></a>
 					</div>
 					<div class="cart-item-info">
-						<h4><a href="single.php"> Lorem Ipsum is not simply </a><span>Pickup time :</span></h4>
+						<h4><a href="single.php?pid=<?=$item['product']['id']?>"><?=$item['product']['name']?></a></h4>
 						<ul class="qty">
-							<li><p>Min. order value :</p></li>
-							<li><p>FREE delivery</p></li>
+							<li><p>Prix unitaire: <?=$item['product']['price']?> €</p></li>
+							<li><p>Quantité : <?=$item['nb']?></p></li>
+							<li><p>Livraison GRATUITE</p></li>
 						</ul>
+						<h4><span>Prix: <?=$item['product']['price'] * $item['nb']?> €</span></h4>
 						<div class="delivery">
-							<p>Service Charges : $10.00</p>
-							<span>Delivered in 1-1:30 hours</span>
+							<span>Livrer dans la semaine</span>
 							<div class="clearfix"></div>
 						</div>	
 					</div>
 					<div class="clearfix"></div>
 				</div>
 			</div>
-			<div class="cart-header1 wow fadeInUp animated" data-wow-delay=".7s">
-				<div class="alert-close1"> </div>
-				<div class="cart-sec simpleCart_shelfItem">
-					<div class="cart-item cyc">
-						<a href="single.php"><img src="images/g5.jpg" class="img-responsive" alt=""></a>
-					</div>
-					<div class="cart-item-info">
-						<h4><a href="single.php"> Lorem Ipsum is not simply </a><span>Pickup time :</span></h4>
-						<ul class="qty">
-							<li><p>Min. order value :</p></li>
-							<li><p>FREE delivery</p></li>
-						</ul>
-						<div class="delivery">
-						<p>Service Charges : $10.00</p>
-						<span>Delivered in 1-1:30 hours</span>
-						<div class="clearfix"></div>
-					</div>	
-				   </div>
-				   <div class="clearfix"></div>
-				</div>
+			<?php endforeach; ?>
+			<?php if (count($pan_products) == 0): ?>
+				<h4>Votre panier est vide</h4>
+			<?php else: ?>
+			<div class="fadeInUp animated" data-wow-delay=".5s">
+				<h3><span>Prix total: <?=$pan['price']?> €</span></h3>
+				<input class="btn btn-info" value="Passer commande" <?=$logged ? '':'disabled'?>/>
+				<?php if (! $logged){ echo '<span>Créez vous un compte ou connectez vous pour passer commande</span>'; } ?>
 			</div>
-			<div class="cart-header2 wow fadeInUp animated" data-wow-delay=".9s">
-				<div class="alert-close2"> </div>
-				<div class="cart-sec simpleCart_shelfItem">
-					<div class="cart-item cyc">
-						<a href="single.php"><img src="images/g9.jpg" class="img-responsive" alt=""></a>
-					</div>
-					<div class="cart-item-info">
-						<h4><a href="single.php"> Lorem Ipsum is not simply </a><span>Pickup time :</span></h4>
-						<ul class="qty">
-							<li><p>Min. order value :</p></li>
-							<li><p>FREE delivery</p></li>
-						</ul>
-						<div class="delivery">
-							<p>Service Charges : $10.00</p>
-							<span>Delivered in 1-1:30 hours</span>
-							<div class="clearfix"></div>
-						</div>	
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>		
+			<?php endif;?>
 		</div>
 	</div>
 	<!--//cart-items-->	
