@@ -8,9 +8,7 @@ include_once('../connect.php');
 $dbh = $connect;
 
 $r_categorie_list = $dbh->prepare('select c.name, count(id_products) as n_members from a_products_categories a right join categories c on c.id=a.id_categories group by c.name');
-$r_categorie_insert = $dbh->prepare('insert into categories (name) values (:nom)');
-$r_categorie_delete = $dbh->prepare('delete from categories where name=:nom');
-$r_categorie_list_for_product = $dbh->prepare('select c.name from a_products_categories a inner join categories c on c.id=a.id_categories where a.id_products=:id');
+
 
 /**
  * Get the categories of a product
@@ -19,7 +17,8 @@ $r_categorie_list_for_product = $dbh->prepare('select c.name from a_products_cat
  * @return an array ['cat1', 'cat2', ...]
  */
 function get_categories($id) {
-	global $r_categorie_list_for_product;
+	global $dbh;
+	$r_categorie_list_for_product = $dbh->prepare('select c.name from a_products_categories a inner join categories c on c.id=a.id_categories where a.id_products=:id');
 	$r_categorie_list_for_product->bindParam(':id', $id);
 	$r_categorie_list_for_product->execute();
 	return array_keys($r_categorie_list_for_product->fetchAll(PDO::FETCH_GROUP));
@@ -66,6 +65,7 @@ function get_header_categories() {
  * Path to delete a category
  */
 if ($admin && isset($_POST['nom_supprimer'])) {
+	$r_categorie_delete = $dbh->prepare('delete from categories where name=:nom');
 	$nom = base64_decode($_POST['nom_supprimer']);
 	$r_categorie_delete->bindParam(':nom', $nom);
 	$res = $r_categorie_delete->execute();
@@ -81,6 +81,7 @@ if ($admin && isset($_POST['nom_supprimer'])) {
  * Path to add a category
  */
 if ($admin && isset($_POST['nom_ajout'])) {
+	$r_categorie_insert = $dbh->prepare('insert into categories (name) values (:nom)');
 	$nom = $_POST['nom_ajout'];
 	$r_categorie_insert->bindParam(':nom', $nom);
 	$r_categorie_insert->execute();

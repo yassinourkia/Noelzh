@@ -9,18 +9,6 @@ require_once('groups.php');
 include_once('../connect.php');
 $dbh = $connect;
 
-$r_product_select = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description from products p where p.id=:id_produit');
-$r_product_random_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description from products p where p.quantity >= 0 order by rand() limit :nb');
-$r_product_nocat_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description from products p where p.quantity >= 0  and p.id not in (select id_products from a_products_categories)');
-$r_product_cat_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description from products p inner join a_products_categories a on a.id_products=p.id inner join categories c on c.id=a.id_categories where c.name=:cat and p.quantity >= 0');
-$r_product_insert = $dbh->prepare('insert into products (name, price, quantity, size, description, picture) values (:nom, :prix, :quantite, :taille, :description, :image)');
-$r_product_update = $dbh->prepare('update products set name=:nom, price=:prix, quantity=:quantite, size=:taille, description=:description, picture=:image where id=:pid');
-$r_product_update_nopic = $dbh->prepare('update products set name=:nom, price=:prix, quantity=:quantite, size=:taille, description=:description where id=:pid');
-$r_product_delete = $dbh->prepare('delete from products where id=:id');
-$r_product_unavailable = $dbh->prepare('update products set quantity=-1 where id=:id');
-$r_product_add_cat = $dbh->prepare('insert into a_products_categories (id_categories, id_products) values ((select id from categories where name=:cat_name limit 1), :id_produit)');
-$r_product_rem_cat = $dbh->prepare('delete from a_products_categories where id_categories = (select id from categories where name=:cat_name limit 1) and id_products=:id_produit');
-
 
 /**
  * Create a list of random products
@@ -29,7 +17,8 @@ $r_product_rem_cat = $dbh->prepare('delete from a_products_categories where id_c
  * @return an array [[0] -> ['name'->'Truc', 'price'->'24.3', 'quantity'->'4', size->'M', 'descritpion'->'Mon ...'], ...]
  */
 function random_products($nb = 4) {
-	global $r_product_random_list;
+	global $dbh;
+	$r_product_random_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description from products p where p.quantity >= 0 order by rand() limit :nb');
 	$r_product_random_list->bindParam(':nb', $nb);
 	$r_product_random_list->execute();
 	return $r_product_random_list->fetchAll();
@@ -42,7 +31,8 @@ function random_products($nb = 4) {
  * @return  an array ['name'->'Truc', 'price'->'24.3', 'quantity'->'4', size->'M', 'descritpion'->'Mon ...']
  */
 function product($id) {
-	global $r_product_select;
+	global $dbh;
+	$r_product_select = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description from products p where p.id=:id_produit');
 	$r_product_select->bindParam(':id_produit', $id, PDO::PARAM_INT);
 	$r_product_select->execute();
 	return $r_product_select->fetch();
@@ -53,6 +43,7 @@ function product($id) {
  * Path to add a new product
  */
 if ($admin && isset($_POST['nom_produit']) && !isset($_POST['mod_id'])) {
+	$r_product_insert = $dbh->prepare('insert into products (name, price, quantity, size, description, picture) values (:nom, :prix, :quantite, :taille, :description, :image)');
 	$nom = $_POST['nom_produit'];
 	$prix = (int) $_POST['prix'];
 	$taille = $_POST['taille'];
@@ -69,6 +60,7 @@ if ($admin && isset($_POST['nom_produit']) && !isset($_POST['mod_id'])) {
 	$p_id = $dbh->lastInsertId();
 	
 	if (isset($_POST['group'])) { // Adding the product to categories
+		$r_product_add_cat = $dbh->prepare('insert into a_products_categories (id_categories, id_products) values ((select id from categories where name=:cat_name limit 1), :id_produit)');
 		$cat = $_POST['group'];
 		foreach ($cat as $cat_name) {
 			$cn = urldecode($cat_name);
@@ -84,6 +76,8 @@ if ($admin && isset($_POST['nom_produit']) && !isset($_POST['mod_id'])) {
  * The image is optional
  */
 if ($admin && isset($_POST['nom_produit']) && isset($_POST['mod_id'])) {
+	$r_product_update = $dbh->prepare('update products set name=:nom, price=:prix, quantity=:quantite, size=:taille, description=:description, picture=:image where id=:pid');
+	$r_product_update_nopic = $dbh->prepare('update products set name=:nom, price=:prix, quantity=:quantite, size=:taille, description=:description where id=:pid');
 	$id = $_POST['mod_id'];
 	$nom = $_POST['nom_produit'];
 	$prix = (int) $_POST['prix'];
@@ -129,9 +123,10 @@ if ($admin && isset($_POST['nom_produit']) && isset($_POST['mod_id'])) {
  * Path to delete a product
  */
 if ($admin && isset($_POST['id_p_supprimer'])) {
+	$r_product_rem_cat = $dbh->prepare('delete from a_products_categories where id_categories = (select id from categories where name=:cat_name limit 1) and id_products=:id_produit');
 	$id = $_POST['id_p_supprimer'];
 	$prev_cat = get_categories($id);
-	
+
 	foreach ($prev_cat as $cat_name) { // removing the product from its categories
 			$cn = $cat_name;
 			$r_product_rem_cat->bindParam(':cat_name', $cn);
@@ -139,20 +134,24 @@ if ($admin && isset($_POST['id_p_supprimer'])) {
 			$r_product_rem_cat->execute();
 	}
 	try { // try to delete the product
+		$r_product_delete = $dbh->prepare('delete from products where id=:id');
 		$r_product_delete->bindParam(':id', $id);
 		$r_product_delete->execute();
 	} catch (Exception $e) { // The product cannot be deleted, making it unavailable
+		$r_product_unavailable = $dbh->prepare('update products set quantity=-1 where id=:id');
 		$r_product_unavailable->bindParam(':id', $id);
 		$r_product_unavailable->execute();
 	}
 }
 
 if (isset($_GET['n'])) {
+	$r_product_cat_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description from products p inner join a_products_categories a on a.id_products=p.id inner join categories c on c.id=a.id_categories where c.name=:cat and p.quantity >= 0');
 	$name = urldecode($_GET['n']);
 	$r_product_cat_list->bindParam(':cat', $name);
 	$r_product_cat_list->execute();
 	$products = $r_product_cat_list->fetchAll();
 } else {
+	$r_product_nocat_list = $dbh->prepare('select p.id, p.name, p.price, p.quantity, p.size, p.description from products p where p.quantity >= 0  and p.id not in (select id_products from a_products_categories)');
 	$r_product_nocat_list->execute();
 	$products = $r_product_nocat_list->fetchAll();
 }

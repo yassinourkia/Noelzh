@@ -2,7 +2,7 @@
 require_once('header.php');
 require_once('../Products/panier.php');
 
-$pan = panier_get_info();
+$pan = panier_get_info(false);
 $pan_products = panier_get_products();
 $logged = isset($_SESSION['user_id']);
 ?>

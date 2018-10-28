@@ -11,7 +11,7 @@ define('MYSQL_USER', 'root');
 define('MYSQL_PASSWORD', '');
  
 //The server that MySQL is located on.
-define('MYSQL_HOST', 'localhost');
+define('MYSQL_HOST', '127.0.0.1');
 
 //The name of our database.
 define('MYSQL_DATABASE', 'noelzh');
