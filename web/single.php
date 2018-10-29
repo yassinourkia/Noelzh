@@ -1,7 +1,7 @@
 <?php
 require_once('header.php');
 require_once('../Products/products.php');
-
+include_once('../Comment/ratingcount.php');
 $product = product($_GET['pid']);
 if ($product != null):
 ?>
@@ -32,19 +32,17 @@ if ($product != null):
 					<h3><?=htmlspecialchars($product['name'])?></h3>
 					<div class="single-rating">
 						<span class="starRating">
-							<input id="rating5" type="radio" name="rating" value="5" checked>
+							
 							<label for="rating5">5</label>
-							<input id="rating4" type="radio" name="rating" value="4">
+							
 							<label for="rating4">4</label>
-							<input id="rating3" type="radio" name="rating" value="3">
+							
 							<label for="rating3">3</label>
-							<input id="rating2" type="radio" name="rating" value="2">
+							
 							<label for="rating2">2</label>
-							<input id="rating1" type="radio" name="rating" value="1">
+							
 							<label for="rating1">1</label>
 						</span>
-						<p>5.00 sur 5</p>
-						<a href="#">Ajouter un avis</a>
 					</div>
 					<h6 class="item_price"><?=htmlspecialchars($product['price'])?> €</h6>			
 					<p><?=htmlspecialchars($product['description'])?></p>
@@ -53,18 +51,15 @@ if ($product != null):
 						<li><a href="#"><?=htmlspecialchars($product['size'])?></a></li>
 					</ul>
 					<div class="clearfix"> </div>
-					<form method="post" action="../Products/panier.php">
-					<input type="hidden" name="panier_item_id" value="<?=urlencode($product['id'])?>"/> 
 					<div class="quantity">
-						<p class="qty"> Quantité :  </p><input min="1" type="number" value="1" class="item_quantity" name="panier_qty">
+						<p class="qty"> Quantité :  </p><input min="1" type="number" value="1" class="item_quantity">
 					</div>
 					<div class="btn_form">
-						<input type="submit" class="btn btn-info" name="panier_add" value="Ajouter au panier"/>
+						<a href="#" class="add-cart item_add">Ajouter au panier</a>
 						<?php if ($admin): ?>
 						<a href="adm_product.php?mod_id=<?=urlencode($product['id'])?>" class="btn btn-info">Modifier</a>
 						<?php endif; ?>
 					</div>
-					</form>
 				</div>
 			   <div class="clearfix"> </div>
 			</div>
@@ -103,12 +98,11 @@ if ($product != null):
 						<div class="panel-heading" role="tab" id="headingThree">
 							<h4 class="panel-title">
 								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-									Avis (<?php include_once('../Comment/ratingcount.php');?>)
+									Avis (<?php 
+									if(!empty(getCountComment($product['id']))) echo getCountComment($product['id']); else echo 0;?>)
 								</a>
 							</h4>
 						</div>
-
-						
 						<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 							<div class="panel panel-default">
 								<div class="panel-heading">Poster vos commentaires</div>
@@ -116,18 +110,26 @@ if ($product != null):
 								  	<form method="post" action="../Comment/postcomment.php">
 								  	  <div class="form-group">
 									    <label for="user_name">Nom </label>
-									    <input type="text" value ="<?php echo $_SESSION['user_name'];?>" name="name" class="form-control" id="user_name" disabled />
+									    <input type="text" value ="<?php echo $_SESSION['user_name']; $_SESSION['id_products']=$product['id'];?>" name="name" class="form-control" id="user_name" disabled />
 									  </div>
 									  <div class="form-group">
-									    <label for="rating">Note </label>
-									    <select name="rating" id="rating">
-										  <option value="5">5</option>
-										  <option value="4">4</option>
-										  <option value="3">3</option>
-										  <option value="2">2</option>
-										  <option value="1">1</option>
-										</select>
+									  	<label for="rating_avg"><?php echo getAvgRating($product['id']);?></label>
 									  </div>
+									  <div class="single-rating">
+										<span class="starRating">
+											<input id="rating5" type="radio" name="rating" value="5">
+											<label for="rating5">5</label>
+											<input id="rating4" type="radio" name="rating" value="4">
+											<label for="rating4">4</label>
+											<input id="rating3" type="radio" name="rating" value="3">
+											<label for="rating3">3</label>
+											<input id="rating2" type="radio" name="rating" value="2">
+											<label for="rating2">2</label>
+											<input id="rating1" type="radio" name="rating" value="1">
+											<label for="rating1">1</label>
+										</span>
+										<p>5.00 sur 5</p>
+									</div>
 									  <div class="form-group">
 									    <label for="exampleInputPassword1">Commentaire</label>
 									    <textarea name="contenu" class="form-control" rows="3"></textarea>

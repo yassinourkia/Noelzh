@@ -14,7 +14,7 @@ session_start();
 require_once '../connect.php';
 if(! isset($_SESSION['user_id']))
 {
-    header("location:../web/login.php");
+    header("location:../web/signin.php");
 }
 else
 {
@@ -23,8 +23,6 @@ else
 		echo "here";
 		if( isset($_POST["contenu"]) && isset($_POST["rating"]) && isset($_SESSION['id_products']) && isset($_SESSION['user_id']) )
 	    {
-
-    		
     		$insert_query = "
 				INSERT INTO `ratings` (`id`, `text`, `rating`, `id_products`, `id_users`) VALUES (NULL, :contenu, :rating, :id_products,:id_users)
 				";
@@ -43,9 +41,7 @@ else
 				{
 					$message ='Merci Pour votre commentaire';
 					header("location:../web/single.php?pid=".$_SESSION['id_products']."&message=$message");	
-				}
-				
-
+				}				
 		}
 		else
 		{
@@ -55,7 +51,8 @@ else
 	}
 	else
 	{
-		echo "mochkil";
+		$message = 'Echec';
+		header("location:../web/single.php?pid=1&message=$message");
 	}
 }
 
