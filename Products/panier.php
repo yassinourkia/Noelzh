@@ -69,6 +69,16 @@ function panier_clear() {
 }
 
 /**
+ * Get the list of product id in the panier
+ * 
+ * @return an array [[['id'] => 1 , ['nb'] => 4], ...]
+ */
+function panier_get() {
+	global $panier;
+	return $panier;
+}
+
+/**
  * Get the list of products in the panier.
  *
  * @return an array [[['product'] -> ['id' -> 1, 'name'-> 'toto', ...], ['nb'] -> 2], ...]

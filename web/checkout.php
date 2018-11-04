@@ -52,7 +52,9 @@ $logged = isset($_SESSION['user_id']);
 			<?php else: ?>
 			<div class="fadeInUp animated" data-wow-delay=".5s">
 				<h3><span>Prix total: <?=$pan['price']?> €</span></h3>
-				<input class="btn btn-info" value="Passer commande" <?=$logged ? '':'disabled'?>/>
+				<form action="../Products/checkout.php?buy" method="get">
+				<input type="submit" name="buy" class="btn btn-info" value="Passer commande" <?=$logged ? '':'disabled'?>/>
+				</form>
 				<?php if (! $logged){ echo '<span>Créez vous un compte ou connectez vous pour passer commande</span>'; } ?>
 			</div>
 			<?php endif;?>
