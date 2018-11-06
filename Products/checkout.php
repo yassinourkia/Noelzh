@@ -28,6 +28,7 @@ function buy_panier() {
 		$r_product_qty_dec = $dbh->prepare('update products set quantity = quantity - :qty where id = :id_p');
 		$r_product_qty_check = $dbh->prepare('select quantity from products where id = :id_p');
 
+		$erreur = false;
 		foreach ($panier as $p) {
 			$p_product = $p['id'];
 			$p_qty = $p['nb'];
@@ -44,10 +45,11 @@ function buy_panier() {
 			if ($qty < 0) {
 				echo 'Le produit '.htmlspecialchars($p_product).' n\'est plus disponible en quantitée suffisante<br/>';
 				echo 'Il en reste '.($p_qty + $qty).'<br/>';
-				if ($dbh->inTransaction())
-					$dbh->rollBack();
+				$erreur = true;
 			}
 		}
+		if ($erreur && $dbh->inTransaction())
+			$dbh->rollBack();
 		if ($dbh->inTransaction() && $dbh->commit()) {
 			panier_clear();
 			echo 'La transaction a été enregistrée';
