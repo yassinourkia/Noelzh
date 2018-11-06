@@ -6,13 +6,20 @@
 		include_once('../connect.php');
 		$dbh = $connect;
 		
+		$r_insert = $dbh->prepare('insert into messages (id_users, message) values (:idusers, :msg)');
+		if ($admin && isset($_POST['message'])) {
+			$r_insert->bindParam(':idusers', $_SESSION['user_id']);
+			$r_insert->bindParam(':msg', $_POST['message']); 
+			$r_insert->execute();
+		}
+		
 		$r_messages = $dbh->prepare('select * from messages');
 		$r_messages->execute();
 		$messages = $r_messages->fetchAll();
 		
 		$r_author = $dbh->prepare('select name from users where id = :iduser');
 		
-		$r_insert = $dbh->prepare('insert into messages (id_users, message) values (:idusers, :msg)');
+		
 ?>
 
 		<!--breadcrumbs-->
@@ -49,13 +56,7 @@
 					<?php endforeach; ?>
 				</div>
 				<div> <!-- envoi message -->
-					<?php
-						if ($admin && isset($_POST['message'])) {
-							$r_insert->bindParam(':idusers', $_SESSION['user_id']);
-							$r_insert->bindParam(':msg', $_POST['message']); 
-							$r_insert->execute();
-						}
-					?>
+
 					<form method="post" enctype="multipart/form-data">
 						<div class="form-group">
 							<textarea name="message" class="form-control" placeholder="Message" maxlength="500"></textarea>
