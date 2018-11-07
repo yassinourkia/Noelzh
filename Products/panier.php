@@ -7,7 +7,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once('products.php');
+require_once('../Products/products.php');
 include_once('../connect.php');
 $dbh = $connect;
 
