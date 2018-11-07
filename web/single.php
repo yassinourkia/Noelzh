@@ -31,18 +31,15 @@ if ($product != null):
 				<div class="col-md-6 single-top-left simpleCart_shelfItem wow fadeInRight animated" data-wow-delay=".5s">
 					<h3><?=htmlspecialchars($product['name'])?></h3>
 					<div class="single-rating">
-						<span class="starRating">
+						<?php $avg = getAvgRating($product['id']);
 							
-							<label for="rating5">5</label>
 							
-							<label for="rating4">4</label>
-							
-							<label for="rating3">3</label>
-							
-							<label for="rating2">2</label>
-							
-							<label for="rating1">1</label>
-						</span>
+						echo '<span class="starRating">';
+						for ($x = 1; $x <= $avg; $x++) {
+							echo '<label for="rating'.$x.'">'.$x.'</label>';
+						}
+						echo '</span>';
+						?>
 					</div>
 					<h6 class="item_price"><?=htmlspecialchars($product['price'])?> €</h6>			
 					<p><?=htmlspecialchars($product['description'])?></p>
@@ -115,9 +112,7 @@ if ($product != null):
 									    <label for="user_name">Nom </label>
 									    <input type="text" value ="<?php echo $_SESSION['user_name']; $_SESSION['id_products']=$product['id'];?>" name="name" class="form-control" id="user_name" disabled />
 									  </div>
-									  <div class="form-group">
-									  	<label for="rating_avg"><?php echo getAvgRating($product['id']);?></label>
-									  </div>
+									  
 									  <div class="single-rating">
 										<span class="starRating">
 											<input id="rating5" type="radio" name="rating" value="5">

@@ -78,11 +78,16 @@ $(window).load(function() {
 		<div class="top-header navbar navbar-default"><!--header-one-->
 			<div class="container">
 				<?php
-					if(isset($_SESSION['user_id']) && isset($_SESSION['user_name']))
+					if(isset($_SESSION['user_id']) && isset($_SESSION['user_name'])){
 						echo '<div class="nav navbar-nav wow fadeInLeft animated" data-wow-delay=".5s">
-								<p>Bienvenue chez Noelzh <a href="profil.php">'.$_SESSION['user_name'].' </a></p>
-								<a href="../login/logout.php" >Se déconnecter </a>
+								<p>Bienvenue chez Noelzh <a href="profil.php">'.$_SESSION['user_name'].' </a></p>';
+								if(isset($_SESSION['admin_id']))
+								{
+									echo '<a href="../web/messages.php"  >Messagerie interne </a><br>';
+								}
+								echo '<a href="../login/logout.php" >Se déconnecter </a>
 							</div>';
+					}
 					else 
 						echo '<div class="nav navbar-nav wow fadeInLeft animated" data-wow-delay=".5s">
 								<p>Bienvenue chez Noelzh ! <a href="register.php">Créer un compte </a> - <a href="signin.php">Se Connecter</a></p>
