@@ -8,7 +8,7 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `quantity`, `size`
 
 INSERT INTO categories VALUES (NULL, 'Adultes'), (NULL, 'Enfants');
 
-INSERT INTO a_products_categories VALUES (22, 2), (23, 1), (26, 1), (26, 2);
+INSERT INTO a_products_categories VALUES (2, 22), (1, 23), (1, 26), (2, 26);
 
 
 INSERT INTO ratings VALUES (NULL, 'C\'est trop bien !', 5, 2, 3);
