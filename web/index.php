@@ -30,40 +30,6 @@ require_once('../Products/products.php');
 							</script>
 					</div>
 
-				</div>
-				<div class="col-sm-7 banner-right wow fadeInRight animated" data-wow-delay=".5s">			
-					<section class="slider grid">
-						<div class="flexslider">
-							<ul class="slides">
-								<li>
-									<h4>-30%</h4>
-									<img src="images/b1.png" alt="">
-								</li>
-								<li>
-									<h4>-25%</h4>
-									<img src="images/b2.png" alt="">
-								</li>
-								<li>
-									<h4>-32%</h4>
-									<img src="images/b3.png" alt="">
-								</li>
-							</ul>
-						</div>
-					</section>
-					<!--FlexSlider-->
-					<script defer src="js/jquery.flexslider.js"></script>
-					<script type="text/javascript">
-						$(window).load(function(){
-						  $('.flexslider').flexslider({
-							animation: "pagination",
-							start: function(slider){
-							  $('body').removeClass('loading');
-							}
-						  });
-						});
-					</script>
-					<!--End-slider-script-->
-				</div>
 				<div class="clearfix"> </div>
 			</div>
 		</div>
@@ -98,64 +64,6 @@ require_once('../Products/products.php');
 		</div>
 	</div>
 	<!--//gallery-->
-	<!--trend-->
-	<div class="trend wow zoomIn animated" data-wow-delay=".5s">
-		<div class="container">
-			<div class="trend-info">
-				<section class="slider grid">
-					<div class="flexslider trend-slider">
-						<ul class="slides">
-							<li>
-								<div class="col-md-5 trend-left">
-									<img src="images/t1.png" alt=""/>
-								</div>
-								<div class="col-md-7 trend-right">
-									<h4>Le meilleur <span>POUR VOUS</span></h4>
-									<h5>20% de reduction</h5>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus, justo ac volutpat vestibulum, dolor massa pharetra nunc, nec facilisis lectus nulla a tortor. Duis ultrices nunc a nisi malesuada suscipit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam eu bibendum felis. Sed viverra dapibus tincidunt.</p>
-								</div>
-								<div class="clearfix"></div>
-							</li>
-							<li>
-								<div class="col-md-5 trend-left">
-									<img src="images/t2.png" alt=""/>
-								</div>
-								<div class="col-md-7 trend-right">
-									<h4>Le meilleur <span>POUR VOUS</span></h4>
-									<h5>20% de reduction</h5>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus, justo ac volutpat vestibulum, dolor massa pharetra nunc, nec facilisis lectus nulla a tortor. Duis ultrices nunc a nisi malesuada suscipit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam eu bibendum felis. Sed viverra dapibus tincidunt.</p>
-								</div>
-								<div class="clearfix"></div>
-							</li>
-							<li>
-								<div class="col-md-5 trend-left">
-									<img src="images/t3.png" alt=""/>
-								</div>
-								<div class="col-md-7 trend-right">
-									<h4>Le meilleur <span>POUR VOUS</span></h4>
-									<h5>20% de reduction</h5>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus, justo ac volutpat vestibulum, dolor massa pharetra nunc, nec facilisis lectus nulla a tortor. Duis ultrices nunc a nisi malesuada suscipit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam eu bibendum felis. Sed viverra dapibus tincidunt.</p>
-								</div>
-								<div class="clearfix"></div>
-							</li>
-							<li>
-								<div class="col-md-5 trend-left">
-									<img src="images/t4.png" alt=""/>
-								</div>
-								<div class="col-md-7 trend-right">
-									<h4>Le meilleur <span>POUR VOUS</span></h4>
-									<h5>20% de reduction</h5>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus, justo ac volutpat vestibulum, dolor massa pharetra nunc, nec facilisis lectus nulla a tortor. Duis ultrices nunc a nisi malesuada suscipit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam eu bibendum felis. Sed viverra dapibus tincidunt.</p>
-								</div>
-								<div class="clearfix"></div>
-							</li>
-						</ul>
-					</div>
-				</section>
-			</div>
-		</div>
-	</div>
-	<!--//trend-->
 <?php
 require_once('footer.php');
 ?>
