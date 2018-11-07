@@ -12,13 +12,11 @@
 		echo '	<tr><td><b>'.$row["name"].'</b></td></tr>
 				<tr class="active">
 					<td>
-						<div class="single-rating">
-							<span class="starRating">';
+						';
 							for ($x = 1; $x <= $rating; $x++) {
-								echo '<label for="rating'.$x.'"></label>';
+								echo '<img src="../web/images/star1.png" height="20px" width="20px"/>';
 							}
-						echo '</span>
-						</div>
+						echo '
 					</td>
 				</tr>
 				<tr class="active"><td> '.$row["text"].'</td></tr>';
