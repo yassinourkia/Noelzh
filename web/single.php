@@ -31,14 +31,11 @@ if ($product != null):
 				<div class="col-md-6 single-top-left simpleCart_shelfItem wow fadeInRight animated" data-wow-delay=".5s">
 					<h3><?=htmlspecialchars($product['name'])?></h3>
 					<div class="single-rating">
-						<?php $avg = getAvgRating($product['id']);
-							
-							
-						echo '<span class="starRating">';
-						for ($x = 1; $x <= $avg; $x++) {
-							echo '<label for="rating'.$x.'">'.$x.'</label>';
-						}
-						echo '</span>';
+						<?php
+							$avg = getAvgRating($product['id']);
+							for ($x = 1; $x <= $avg; $x++) {
+								echo '<img src="images/star1.png" height="20px" width="20px"/>';
+							}
 						?>
 					</div>
 					<h6 class="item_price"><?=htmlspecialchars($product['price'])?> €</h6>			
@@ -110,7 +107,7 @@ if ($product != null):
 								  	<form method="post" action="../Comment/postcomment.php">
 								  	  <div class="form-group">
 									    <label for="user_name">Nom </label>
-									    <input type="text" value ="<?php echo $_SESSION['user_name']; $_SESSION['id_products']=$product['id'];?>" name="name" class="form-control" id="user_name" disabled />
+									    <input type="text" value ="<?php if(isset($_SESSION['user_name'])) echo $_SESSION['user_name']; $_SESSION['id_products']=$product['id'];?>" name="name" class="form-control" id="user_name" disabled />
 									  </div>
 									  
 									  <div class="single-rating">
