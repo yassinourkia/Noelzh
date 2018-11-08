@@ -13,7 +13,7 @@
 			$r_insert->execute();
 		}
 		
-		$r_messages = $dbh->prepare('select * from messages');
+		$r_messages = $dbh->prepare('select * from messages order by `date` asc');
 		$r_messages->execute();
 		$messages = $r_messages->fetchAll();
 		
@@ -56,23 +56,16 @@
 					<?php endforeach; ?>
 				</div>
 				<div> <!-- envoi message -->
-
 					<form method="post" enctype="multipart/form-data">
 						<div class="form-group">
-							<textarea name="message" class="form-control" placeholder="Message" maxlength="500"></textarea>
+							<textarea id="msgarea" name="message" class="form-control" placeholder="Message" maxlength="500"></textarea>
 						</div>
-						<input type="submit" class="form-control btn btn-primary" value="Envoyer">
+						<input type="submit" class="form-control btn btn-primary" value="Envoyer" onclick="emptyText()">
 					</form>
 				</div>
 			</div>
 		</div>
 		<!--//messagerie-->
-		
-		<!--<script>
-		function updateMsg() { 
-			$("#msg").load(window.location.href+"#msg");
-		}
-		</script>-->
 
 <?php
 	endif;

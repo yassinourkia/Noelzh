@@ -196,6 +196,7 @@ $(window).load(function() {
 							<li><a href="products.php">Autre</a></li>
 							<?php if ($admin) : ?>
 							<li><a href="adm_product.php">Gérer les produits</a></li>
+							<li><a href="messages.php">Messagerie</a></li>
 							<?php endif; ?>
 						</ul> 
 						<?php if ($admin) : ?>
