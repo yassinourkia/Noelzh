@@ -8,6 +8,28 @@ if(isset($_SESSION['id']))
 	header("location:../web/index.php");
 }
 
+function verify_password_complexity($password) {
+	$ret = true;
+	if (strlen($password) < 12) {
+		$ret = false;
+	}
+	if (!preg_match("/[A-Z]{1}/", $password) && !preg_match("/[a-z]{1}/", $password)) {
+		$ret = false;
+	}
+	if (!preg_match("/[0-9]{1}/", $password)) {
+		$ret = false;
+	}
+	if (!preg_match("/\W+/", $password)) {
+		$ret = false;
+	}
+	return $ret;
+}
+
+assert(verify_password_complexity("a") == false);
+assert(verify_password_complexity("zaefaeazee") == false);
+assert(verify_password_complexity("zaefaeaZzZee") == false);
+assert(verify_password_complexity("zaefae@ZZ12@azee") == true);
+
 $message = '';
 
 if(isset($_POST["register"]))
@@ -35,6 +57,11 @@ if(isset($_POST["register"]))
 			if($_POST['password'] == $_POST['password_verify'])
 			{
 				$user_password = $_POST['password'];
+				if (!verify_password_complexity($user_password)) {
+					$message ='Votre mot de passe est trop faible. Merci d\'utiliser au moins 12 caractères, avec des majuscules, minuscules, chiffres et caractères spèciaux';
+					header("location:../web/register.php?message=$message");
+					exit();
+				}
 				$user_encrypted_password = password_hash($user_password, PASSWORD_BCRYPT);
 				$user_activation_code = md5(rand());
 				$insert_query = "
