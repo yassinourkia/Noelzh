@@ -50,6 +50,8 @@ if ($admin && isset($_POST['nom_produit']) && !isset($_POST['mod_id'])) {
 	$quantite = isset($_POST['quantite']) ? $_POST['quantite'] : 0;
 	$description = trim($_POST['description']);
 	$image = file_get_contents ($_FILES['image']['tmp_name']);
+	if($prix <= 0 || $quantite <= 0) 
+		exit("Prix ou Quantité negatif ");
 	$r_product_insert->bindParam(':nom', $nom);
 	$r_product_insert->bindParam(':prix', $prix, PDO::PARAM_INT);
 	$r_product_insert->bindParam(':quantite', $quantite);
@@ -85,7 +87,8 @@ if ($admin && isset($_POST['nom_produit']) && isset($_POST['mod_id'])) {
 	$quantite = isset($_POST['quantite']) ? $_POST['quantite'] : 0;
 	$description = trim($_POST['description']);
 	$prev_cat = get_categories($id);
-	
+	if($prix <= 0 || $quantite <= 0) 
+		exit("Prix ou Quantité negatif ");
 	if (! isset($_FILES['image']) or $_FILES['image']['tmp_name'] == '') {
 		$req = $r_product_update_nopic;
 	} else {
