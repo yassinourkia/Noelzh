@@ -1,6 +1,7 @@
 <?php
 require_once('header.php');
 require_once('../Products/panier.php');
+require_once('csrf.php');
 
 $pan = panier_get_info(false);
 $pan_products = panier_get_products();
@@ -24,6 +25,7 @@ $logged = isset($_SESSION['user_id']);
 			<div class="cart-header wow fadeInUp animated" data-wow-delay=".5s">
 				<form method="post" action="../Products/panier.php">
 					<input type="hidden" name="panier_item_id" value="<?=urlencode($item['product']['id'])?>">
+					<?php create_csrf_field(); ?>
 					<input type="submit" name="panier_remove" class="alert-close" value=""/>
 				</form>
 				<div class="cart-sec simpleCart_shelfItem">
@@ -53,6 +55,7 @@ $logged = isset($_SESSION['user_id']);
 			<div class="fadeInUp animated" data-wow-delay=".5s">
 				<h3><span>Prix total: <?=$pan['price']?> €</span></h3>
 				<form action="../Products/checkout.php?buy" method="get">
+				<?php create_csrf_field(); ?>
 				<input type="submit" name="buy" class="btn btn-info" value="Passer commande" <?=$logged ? '':'disabled'?>/>
 				</form>
 				<?php if (! $logged){ echo '<span>Créez vous un compte ou connectez vous pour passer commande</span>'; } ?>

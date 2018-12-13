@@ -1,5 +1,6 @@
 <?php
 require_once('header.php');
+require_once('csrf.php');
 
 if( isset($_SESSION['user_id']) )
 {
@@ -8,51 +9,46 @@ if( isset($_SESSION['user_id']) )
 	$userinfo = $requser->fetch();
 
 	
-	if(isset($_POST['newname']) AND !empty($_POST['newname']) AND $_POST['newname'] != $userinfo['name'] )
+	if(isset($_POST['newname']) AND !empty($_POST['newname']) AND $_POST['newname'] != $userinfo['name'] AND check_csrf_token($_POST))
     {
       $newname = htmlspecialchars($_POST['newname']);
       $insertpseudo = $connect->prepare("UPDATE users SET name = ? WHERE id = ?");
       $insertpseudo->execute(array($newname, $_SESSION['user_id']));
-	  echo "<meta http-equiv='refresh' content='0'>";
     }
 	
-	if(isset($_POST['newemail']) AND !empty($_POST['newemail']) AND $_POST['newemail'] != $userinfo['email'] )
+	if(isset($_POST['newemail']) AND !empty($_POST['newemail']) AND $_POST['newemail'] != $userinfo['email']  AND check_csrf_token($_POST))
     {
 		if (filter_var($_POST['newemail'], FILTER_VALIDATE_EMAIL)) 
 		{
 		  $newemail = htmlspecialchars($_POST['newemail']);
 		  $insertpseudo = $connect->prepare("UPDATE users SET email = ? WHERE id = ?");
 		  $insertpseudo->execute(array($newemail, $_SESSION['user_id']));
-		  echo "<meta http-equiv='refresh' content='0'>";
 		}
     }
 	
-	if(isset($_POST['newphone']) AND !empty($_POST['newphone']) AND $_POST['newphone'] != $userinfo['phone'] )
+	if(isset($_POST['newphone']) AND !empty($_POST['newphone']) AND $_POST['newphone'] != $userinfo['phone']  AND check_csrf_token($_POST))
     {
       $newphone = htmlspecialchars($_POST['newphone']);
       $insertpseudo = $connect->prepare("UPDATE users SET phone = ? WHERE id = ?");
       $insertpseudo->execute(array($newphone, $_SESSION['user_id']));
-	  echo "<meta http-equiv='refresh' content='0'>";
     }
 	
-	if(isset($_POST['newaddress']) AND !empty($_POST['newaddress']) AND $_POST['newaddress'] != $userinfo['adress'] )
+	if(isset($_POST['newaddress']) AND !empty($_POST['newaddress']) AND $_POST['newaddress'] != $userinfo['address']  AND check_csrf_token($_POST))
     {
       $newaddress = htmlspecialchars($_POST['newaddress']);
       $insertpseudo = $connect->prepare("UPDATE users SET address = ? WHERE id = ?");
       $insertpseudo->execute(array($newaddress, $_SESSION['user_id']));
-	  echo "<meta http-equiv='refresh' content='0'>";
     }
 	
-	if(isset($_POST['newavatar']) AND !empty($_POST['newavatar']) )
+	if(isset($_POST['newavatar']) AND !empty($_POST['newavatar'])  AND check_csrf_token($_POST))
     {
       $newavatar = file_get_contents($_FILES["avatar"]["tmp_name"]);
       $insertavatar = $connect->prepare("UPDATE users SET avatar = ? WHERE id = ?");
       $insertavatar->execute(array($newavatar, $_SESSION['user_id']));
-	  echo "<meta http-equiv='refresh' content='0'>";
     }
 	
 	
-	if( isset($_POST['newpassword']) AND !empty($_POST['newpassword']) AND !empty($_POST['newpassword2']) )
+	if( isset($_POST['newpassword']) AND !empty($_POST['newpassword']) AND !empty($_POST['newpassword2'])  AND check_csrf_token($_POST))
     {
       $newpassword = htmlspecialchars($_POST['newpassword']);
 	  $newpassword2 = htmlspecialchars($_POST['newpassword2']);
@@ -60,7 +56,6 @@ if( isset($_SESSION['user_id']) )
 		  $user_encrypted_password = password_hash($newpassword, PASSWORD_BCRYPT);
 		  $insertpassword = $connect->prepare("UPDATE users SET password = ? WHERE id = ?");
 		  $insertpassword->execute(array($user_encrypted_password, $_SESSION['user_id']));
-		  echo "<meta http-equiv='refresh' content='0'>";
 	  }
     }
 	
@@ -97,6 +92,7 @@ if( isset($_SESSION['user_id']) )
 					<label>Addresse</label><input type="text" class="uemail"  name="newaddress" value="<?php echo $userinfo['address'];?>">
 					<label>Nouveau mot de Passe</label><input type="password" name="newpassword" class="lock">
 					<label>Confirmer votre nouveau mot de passe</label><input type="password" name="newpassword2" class="lock">
+					<?php create_csrf_field(); ?>
 					<input type="submit" value="Mettre a jour le profil!">
 				</form>
 			</div>

@@ -1,6 +1,7 @@
 <?php 
 include_once('panier.php');
 include_once('../connect.php');
+require_once('../web/csrf.php');
 $dbh = $connect;
 
 /**
@@ -65,6 +66,9 @@ function buy_panier() {
  * (Temporary) Path to buy everything
  */
 if (isset($_SESSION['user_id']) && isset($_GET['buy'])) {
-	buy_panier();
+	if (check_csrf_token($_GET))
+		buy_panier();
+	else
+		echo 'hacker !';
 }
 ?>

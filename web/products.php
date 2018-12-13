@@ -2,6 +2,7 @@
 require_once('header.php');
 require_once('../Products/products.php');
 require_once('../Products/groups.php');
+require_once('csrf.php');
 ?>
 	<!--breadcrumbs-->
 	<div class="breadcrumbs">
@@ -29,6 +30,7 @@ require_once('../Products/groups.php');
 								<li><input type="number" name="panier_qty" class="item_quantity" min="1" value="1"></li>
 								<li><input type="submit" name="panier_add" value="Ajouter au panier" class="item_quantity item_add"/></li>
 							</ul>
+							<?php create_csrf_field(); ?>
 						</form>
 						</div>
 					</div>
@@ -47,6 +49,7 @@ require_once('../Products/groups.php');
 							<?php if ($admin): ?>
 								<form method="post">
 									<input type="hidden" name="id_p_supprimer" value="<?=$product['id']?>"/>
+									<?php create_csrf_field(); ?>
 									<input type="submit" class="btn btn-danger" value="X"/>
 							</form>
 							<?php endif; ?>

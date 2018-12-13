@@ -2,6 +2,7 @@
 require_once('header.php');
 require_once('../Products/products.php');
 require_once('../Products/groups.php');
+require_once('csrf.php');
 if (isset($_GET['mod_id'])) {
   $id = (int)urldecode($_GET['mod_id']);
   $p = product($id);
@@ -52,6 +53,7 @@ if (isset($_GET['mod_id'])) {
 			<label class="form-check-label" for="group[]"><?=htmlspecialchars($group['name'])?></label>
 		</div>
 		<?php endforeach; ?>
+		<?php create_csrf_field(); ?>
 		<input type="submit" class="form-control btn btn-primary" value="Ajouter"/>
 	</form>
 	<?php endif; ?>

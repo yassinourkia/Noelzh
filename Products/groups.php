@@ -5,6 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 $admin = isset($_SESSION['admin_id']) ? $_SESSION['admin_id']: false;
 
 include_once('../connect.php');
+require_once('../web/csrf.php');
 $dbh = $connect;
 
 $r_categorie_list = $dbh->prepare('select c.name, count(id_products) as n_members from a_products_categories a right join categories c on c.id=a.id_categories group by c.name');
@@ -65,6 +66,7 @@ function get_header_categories() {
  * Path to delete a category
  */
 if ($admin && isset($_POST['nom_supprimer'])) {
+	if (! check_csrf_token($_POST)) exit("csrf");
 	$r_categorie_delete = $dbh->prepare('delete from categories where name=:nom');
 	$nom = base64_decode($_POST['nom_supprimer']);
 	$r_categorie_delete->bindParam(':nom', $nom);
@@ -81,6 +83,7 @@ if ($admin && isset($_POST['nom_supprimer'])) {
  * Path to add a category
  */
 if ($admin && isset($_POST['nom_ajout'])) {
+	if (! check_csrf_token($_POST)) exit("csrf");
 	$r_categorie_insert = $dbh->prepare('insert into categories (name) values (:nom)');
 	$nom = $_POST['nom_ajout'];
 	$r_categorie_insert->bindParam(':nom', $nom);

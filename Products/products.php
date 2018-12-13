@@ -7,6 +7,7 @@ $admin = isset($_SESSION['admin_id']) ? $_SESSION['admin_id']: false;
 require_once('groups.php');
 
 include_once('../connect.php');
+require_once('../web/csrf.php');
 $dbh = $connect;
 
 
@@ -76,6 +77,7 @@ if ($admin && isset($_POST['nom_produit']) && !isset($_POST['mod_id'])) {
  * The image is optional
  */
 if ($admin && isset($_POST['nom_produit']) && isset($_POST['mod_id'])) {
+	if (! check_csrf_token($_POST)) exit("csrf");
 	$r_product_update = $dbh->prepare('update products set name=:nom, price=:prix, quantity=:quantite, size=:taille, description=:description, picture=:image where id=:pid');
 	$r_product_update_nopic = $dbh->prepare('update products set name=:nom, price=:prix, quantity=:quantite, size=:taille, description=:description where id=:pid');
 	$id = $_POST['mod_id'];
@@ -105,12 +107,14 @@ if ($admin && isset($_POST['nom_produit']) && isset($_POST['mod_id'])) {
 	$cat = isset($_POST['group'])?$_POST['group']:array();
 	$cat = array_map('urldecode', $cat);
 	foreach (array_diff($cat, $prev_cat) as $cat_name) {
+			$r_product_add_cat = $dbh->prepare('insert into a_products_categories (id_categories, id_products) values ((select id from categories where name=:cat_name limit 1), :id_produit)');
 			$cn = $cat_name;
 			$r_product_add_cat->bindParam(':cat_name', $cn);
 			$r_product_add_cat->bindParam(':id_produit', $id);
 			$r_product_add_cat->execute();
 	}
 	foreach (array_diff($prev_cat, $cat) as $cat_name) {
+			$r_product_rem_cat = $dbh->prepare('delete from a_products_categories where id_categories = (select id from categories where name=:cat_name limit 1) and id_products=:id_produit');
 			$cn = $cat_name;
 			$r_product_rem_cat->bindParam(':cat_name', $cn);
 			$r_product_rem_cat->bindParam(':id_produit', $id);
@@ -123,6 +127,7 @@ if ($admin && isset($_POST['nom_produit']) && isset($_POST['mod_id'])) {
  * Path to delete a product
  */
 if ($admin && isset($_POST['id_p_supprimer'])) {
+	if (! check_csrf_token($_POST)) exit("csrf");
 	$r_product_rem_cat = $dbh->prepare('delete from a_products_categories where id_categories = (select id from categories where name=:cat_name limit 1) and id_products=:id_produit');
 	$id = $_POST['id_p_supprimer'];
 	$prev_cat = get_categories($id);

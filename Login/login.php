@@ -13,6 +13,7 @@ session_start();
  * Include our MySQL connection.
  */
 require '../connect.php';
+require_once('../web/csrf.php');
 if(isset($_SESSION['user_id']))
 {
     header("location:../web/index.php");
@@ -54,6 +55,7 @@ if(isset($_POST["login"]))
 
                         $_SESSION['user_id'] = $row['id'];
                         $_SESSION['user_name'] = $row['name'];
+                        create_csrf_token();
                         header("location:../web/index.php");
                     }
                     else

@@ -1,5 +1,6 @@
 <?php
 require_once('header.php');
+require_once('csrf.php');
 ?>
 	<!--breadcrumbs-->
 	<div class="breadcrumbs">
@@ -32,6 +33,7 @@ require_once('header.php');
 							<input class="wow fadeIndown animated" data-wow-delay=".7s" type="text" placeholder="Email" required="">
 							<input class="wow fadeIndown animated" data-wow-delay=".8s" type="text" placeholder="Sujet" required="">
 							<textarea class="wow fadeIndown animated" data-wow-delay=".8s" placeholder="Message" required=""></textarea>
+							<?php create_csrf_field(); ?>
 							<input class="wow fadeIndown animated" data-wow-delay=".9s" type="submit" value="Envoyer">
 						</form>
 					</div>

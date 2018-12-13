@@ -2,6 +2,7 @@
 require_once('header.php');
 require_once('../Products/products.php');
 include_once('../Comment/ratingcount.php');
+require_once('csrf.php');
 $product = product($_GET['pid']);
 if ($product != null):
 ?>
@@ -46,6 +47,7 @@ if ($product != null):
 					</ul>
 					<div class="clearfix"> </div>
 					<form method="post" action="../Products/panier.php">
+					<?php create_csrf_field(); ?>
 					<input type="hidden" name="panier_item_id" value="<?=urlencode($product['id'])?>"/> 
 					<div class="quantity">
 						<p class="qty"> Quantité :  </p><input min="1" type="number" value="1" class="item_quantity" name="panier_qty">
@@ -129,6 +131,7 @@ if ($product != null):
 									    <label for="exampleInputPassword1">Commentaire</label>
 									    <textarea name="contenu" class="form-control" rows="3"></textarea>
 									  </div>
+									  <?php create_csrf_field(); ?>
 									  <input type="submit" name="send" value="Envoyer" class="btn btn-primary">
 									</form>
 								  </div>

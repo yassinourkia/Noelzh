@@ -20,7 +20,7 @@ else
 {
 	if(isset($_POST["send"]))
 	{
-		if( isset($_POST["contenu"])  && isset($_SESSION['id_products']) && isset($_SESSION['user_id']) )
+		if( isset($_POST["contenu"])  && isset($_SESSION['id_products']) && isset($_SESSION['user_id']) && check_csrf_token($_POST))
 	    {
 
     		$insert_query = "
