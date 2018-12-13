@@ -58,14 +58,14 @@ if(isset($_POST["login"]))
                     }
                     else
                     {
-                        $message = "Mot de passe erroné";
+                        $message = "Email ou mot de passe incorrect";
                         header("location:../web/signin.php?message=$message");
                     }
             }
         }
         else
         {
-            $message = "Email inconnue";
+            $message = "Email ou mot de passe incorrect";
             header("location:../web/signin.php?message=$message");
         }
     }
