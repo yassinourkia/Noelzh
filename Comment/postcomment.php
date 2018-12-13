@@ -27,7 +27,8 @@ else
 				INSERT INTO `ratings` (`id`, `text`, `rating`, `id_products`, `id_users`) VALUES (NULL, :contenu, :rating, :id_products,:id_users)
 				";
 				$statement = $connect->prepare($insert_query);
-				if(isset($_POST["rating"])){
+				if(isset($_POST["rating"]) && $_POST["rating"] >= 0){
+
 					$statement->execute(
 						array(
 							':contenu'			=>	$_POST['contenu'],
@@ -36,17 +37,15 @@ else
 							':id_users'			=>	$_SESSION['user_id']	
 						)
 					);
+					$result = $statement->fetchAll();
 				}
 				else
-				$statement->execute(
-						array(
-							':contenu'			=>	$_POST['contenu'],
-							':rating'			=>	5,
-							':id_products'		=>	$_SESSION['id_products'],
-							':id_users'			=>	$_SESSION['user_id']	
-						)
-					);	
-				$result = $statement->fetchAll();
+				{
+					$message ='Valeurs negatif non autorisé';
+					header("location:../web/single.php?pid=".$_SESSION['id_products']."&message=$message");	
+				}
+				
+				
 				
 				if(isset($result))
 				{
