@@ -9,7 +9,8 @@ create table users (
 	phone		int(12) not null,
 	avatar		longblob not null,
 	address		varchar(100) not null,
-	admin		int(1) not null
+	admin		int(1) not null,
+    unique(email)
 );
 
 drop table if exists orders;

@@ -36,7 +36,11 @@ if(isset($_POST["login"]))
                 )
         );
         $count = $statement->rowCount();
-        if($count > 0)
+        if ($count > 1) {
+            echo "problem";
+            exit();
+        }
+        if($count == 1)
         {
            
             $result = $statement->fetchAll();
@@ -50,7 +54,6 @@ if(isset($_POST["login"]))
 
                         $_SESSION['user_id'] = $row['id'];
                         $_SESSION['user_name'] = $row['name'];
-                        $_SESSION['user_avatar'] = $row['avatar'];
                         header("location:../web/index.php");
                     }
                     else

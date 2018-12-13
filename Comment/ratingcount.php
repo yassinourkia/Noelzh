@@ -3,15 +3,19 @@
 	function getCountComment($id)
 	{
 		global $connect;
-		$stmt = $connect->query("SELECT count(*)  as count, avg(rating) as avg FROM ratings where id_products = ".$id);
-		$row = $stmt->fetch();
+		$req = $connect->prepare("SELECT count(*)  as count, avg(rating) as avg FROM ratings where id_products = :id");
+		$req->bindParam(":id", $id);
+		$req->execute();
+		$row = $req->fetch();
 		return  $row['count'];
 	}
 	function getAvgRating($id)
 	{
 		global $connect;
-		$stmt = $connect->query("SELECT avg(rating) as avg FROM ratings where id_products = ".$id);
-		$row = $stmt->fetch();
+		$req = $connect->prepare("SELECT avg(rating) as avg FROM ratings where id_products = :id");
+		$req->bindParam(":id", $id);
+		$req->execute();
+		$row = $req->fetch();
 		return  round($row['avg']);
 	}
 	

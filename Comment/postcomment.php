@@ -20,7 +20,6 @@ else
 {
 	if(isset($_POST["send"]))
 	{
-		echo "here";
 		if( isset($_POST["contenu"])  && isset($_SESSION['id_products']) && isset($_SESSION['user_id']) )
 	    {
 
