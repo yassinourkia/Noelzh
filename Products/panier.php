@@ -28,8 +28,11 @@ if (! isset($panier_items_cache))
  * @param nb how many product to add
  */
 function panier_add($id, $nb=1) {
+	
 	global $panier;
 	global $panier_items_cache;
+	if($nb <= 0) return;
+
 	$found = false;
 	
 	foreach ($panier as $key => $item) {
