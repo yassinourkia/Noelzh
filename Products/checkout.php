@@ -20,6 +20,10 @@ function buy_panier() {
 		$r_order = $dbh->prepare('insert into orders (id_users, amount) values (:user_id, :amount)');
 		$user_id = $_SESSION['user_id'];
 		$panier_price = $panier_info['price'];
+		if($panier_price <= 0) {
+				$erreur = true;
+				echo "Prix négative";
+			}
 		$r_order->bindParam(':user_id', $user_id);
 		$r_order->bindParam(':amount', $panier_price);
 		$r_order->execute();
@@ -33,6 +37,11 @@ function buy_panier() {
 		foreach ($panier as $p) {
 			$p_product = $p['id'];
 			$p_qty = $p['nb'];
+			if($p_qty <= 0) {
+				$erreur = true;
+				echo "quantité négative";
+			}
+
 			$r_order_add_item->bindParam('id_p', $p_product);
 			$r_order_add_item->bindParam('id_o', $order_id);
 			$r_order_add_item->bindParam('qty', $p_qty);
