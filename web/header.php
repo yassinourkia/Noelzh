@@ -2,6 +2,7 @@
 	session_start();
 	require_once('../Products/groups.php');
 	require_once('../Products/panier.php');
+	require_once('csrf.php');
 ?>
 <!--
 Author: W3layouts
@@ -124,6 +125,7 @@ $(window).load(function() {
 						</a></h4>
 						<div class="cart-box">
 							<form action="../Products/panier.php" method="post">
+								<?php create_csrf_field(); ?>
 								<input type="submit" name="panier_clear" value="Vider le panier" class="simpleCart_empty">
 							</form>
 							<div class="clearfix"> </div>
@@ -161,6 +163,7 @@ $(window).load(function() {
 												<?php if ($admin): ?>
 												<form method="post"  action="../Products/groups.php">
 													<input type="hidden" name="nom_supprimer" value="<?=base64_encode($key)?>"/>
+													<?php create_csrf_field(); ?>
 													<input type="submit" value="Supprimer"/>
 												</form>
 												<?php endif; ?>
@@ -169,6 +172,7 @@ $(window).load(function() {
 												<?php if ($admin): ?>
 												<form method="post" action="../Products/groups.php">
 													<input type="hidden" name="nom_supprimer" value="<?=base64_encode($key.'§'.$sg)?>"/>
+													<?php create_csrf_field(); ?>
 													<input type="submit" value="Supprimer"/>
 												</form>
 												<?php endif; ?>
@@ -197,6 +201,7 @@ $(window).load(function() {
 						<?php if ($admin) : ?>
 						<form method="post" action="../Products/groups.php">
 							<input type="text" name="nom_ajout"/>
+							<?php create_csrf_field(); ?>
 							<input type="submit" value="Ajouter"/>
 						</form>
 						<?php endif; ?>

@@ -9,6 +9,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 require_once('../Products/products.php');
 include_once('../connect.php');
+require_once('../web/csrf.php');
 $dbh = $connect;
 
 $panier = &$_SESSION['panier']; // look at panier_clear when changing;
@@ -134,6 +135,7 @@ function panier_get_info($cache=true) {
  * Path to add an item to the panier
  */
 if (isset($_POST['panier_add'])) {
+	if (! check_csrf_token($_POST)) exit("csrf");
 	panier_add((int)$_POST['panier_item_id'], (int)$_POST['panier_qty']);
 	header('Location: '.$_SERVER['HTTP_REFERER']);
 }
@@ -142,6 +144,7 @@ if (isset($_POST['panier_add'])) {
  * Path to remove an item from the panier
  */
 if (isset($_POST['panier_remove'])) {
+	if (! check_csrf_token($_POST)) exit("csrf");
 	panier_remove((int)$_POST['panier_item_id']);
 	header('Location: '.$_SERVER['HTTP_REFERER']);
 }
@@ -150,6 +153,7 @@ if (isset($_POST['panier_remove'])) {
  * Path to clear all item from the panier
  */
 if (isset($_POST['panier_clear'])) {
+	if (! check_csrf_token($_POST)) exit("csrf");
 	panier_clear();
 	header('Location: '.$_SERVER['HTTP_REFERER']);
 }

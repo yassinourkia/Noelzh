@@ -1,5 +1,6 @@
 <?php
 	require_once('header.php');
+	require_once('csrf.php');
 	
 	if ($admin) :
 	
@@ -8,6 +9,7 @@
 		
 		$r_insert = $dbh->prepare('insert into messages (id_users, message) values (:idusers, :msg)');
 		if ($admin && isset($_POST['message'])) {
+			if (! check_csrf_token($_POST)) exit("csrf");
 			$r_insert->bindParam(':idusers', $_SESSION['user_id']);
 			$r_insert->bindParam(':msg', $_POST['message']); 
 			$r_insert->execute();
@@ -60,6 +62,7 @@
 						<div class="form-group">
 							<textarea id="msgarea" name="message" class="form-control" placeholder="Message" maxlength="500"></textarea>
 						</div>
+						<?php create_csrf_field(); ?>
 						<input type="submit" class="form-control btn btn-primary" value="Envoyer" onclick="emptyText()">
 					</form>
 				</div>
