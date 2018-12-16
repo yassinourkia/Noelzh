@@ -24,7 +24,7 @@ $pdoOptions = array(
 
 
 $connect = new PDO(
-    "mysql:host=" . MYSQL_HOST . ";dbname=" . MYSQL_DATABASE . ";charset=utf8", //DSN
+    "mysql:host=" . MYSQL_HOST . ";dbname=" . MYSQL_DATABASE . ";charset=utf8mb4", //DSN
     MYSQL_USER, //Username
     MYSQL_PASSWORD, //Password
     $pdoOptions //Options

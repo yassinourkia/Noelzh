@@ -48,7 +48,7 @@ if ($admin && isset($_POST['nom_produit']) && !isset($_POST['mod_id'])) {
 	$nom = $_POST['nom_produit'];
 	$prix = (int) $_POST['prix'];
 	$taille = $_POST['taille'];
-	$quantite = isset($_POST['quantite']) ? $_POST['quantite'] : 0;
+	$quantite = isset($_POST['quantite']) ? $_POST['quantite'] : 1;
 	$description = trim($_POST['description']);
 	$image = file_get_contents ($_FILES['image']['tmp_name']);
 	if($prix <= 0 || $quantite <= 0) 
