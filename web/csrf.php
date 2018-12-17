@@ -21,6 +21,7 @@ function create_csrf_token() {
 
 function check_csrf_token($form) {
     if (!isset($form['_csrf'])) exit("csrf token not found");
+    if (!isset($_SESSION['csrf'])) exit("no csrf token created");
     return $_SESSION['csrf'] === $form['_csrf'];
 }
 
