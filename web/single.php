@@ -109,7 +109,8 @@ if ($product != null):
 								  	<form method="post" action="../Comment/postcomment.php">
 								  	  <div class="form-group">
 									    <label for="user_name">Nom </label>
-									    <input type="text" value ="<?php if(isset($_SESSION['user_name'])) echo $_SESSION['user_name']; $_SESSION['id_products']=$product['id'];?>" name="name" class="form-control" id="user_name" disabled />
+									    <input type="text" value ="<?php if(isset($_SESSION['user_name'])) echo $_SESSION['user_name'];?>" name="name" class="form-control" id="user_name" disabled />
+										<input type="hidden" value="<?=$product['id']?>" name="id_products" />
 									  </div>
 									  
 									  <div class="single-rating">
