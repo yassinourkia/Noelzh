@@ -17,17 +17,18 @@ function random_str($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzAB
 
 function create_csrf_token() {
     $_SESSION['csrf'] = random_str(123);
+    header("Set-Cookie: csrf=".$_SESSION['csrf']."; path=/; time=0; sameSite=Strict");
 }
 
-function check_csrf_token($form) {
-    if (!isset($form['_csrf'])) exit("csrf token not found");
+function check_csrf_token() {
     if (!isset($_SESSION['csrf'])) exit("no csrf token created");
-    return $_SESSION['csrf'] === $form['_csrf'];
+    if (!isset($_COOKIE['csrf'])) exit("no csrf token in coockies");
+    return $_SESSION['csrf'] === $_COOKIE['csrf'];
 }
 
 function create_csrf_field() {
-    if (!isset($_SESSION['csrf'])) create_csrf_token();
-    echo '<input type="hidden" name="_csrf" value="'.$_SESSION['csrf'].'"></input>';
+    //if (!isset($_SESSION['csrf'])) create_csrf_token();
+    //echo '<input type="hidden" name="_csrf" value="'.$_SESSION['csrf'].'"></input>';
 }
 
 ?>
