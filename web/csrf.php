@@ -23,7 +23,7 @@ function create_csrf_token() {
 function check_csrf_token() {
     if (!isset($_SESSION['user_id'])) return true;
     if (!isset($_SESSION['csrf'])) exit("no csrf token created");
-    if (!isset($_COOKIE['csrf'])) exit("no csrf token in coockies");
+    if (!isset($_COOKIE['csrf'])) exit("no csrf token in cookies");
     return $_SESSION['csrf'] === $_COOKIE['csrf'];
 }
 
