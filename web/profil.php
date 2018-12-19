@@ -11,7 +11,7 @@ if( isset($_SESSION['user_id']) )
 	
 	if(isset($_POST['newname']) AND !empty($_POST['newname']) AND $_POST['newname'] != $userinfo['name'] AND check_csrf_token($_POST))
     {
-      $newname = htmlspecialchars($_POST['newname']);
+      $newname = htmlspecialchars($_POST['newname'], ENT_QUOTES);
       $insertpseudo = $connect->prepare("UPDATE users SET name = ? WHERE id = ?");
       $insertpseudo->execute(array($newname, $_SESSION['user_id']));
     }
@@ -20,7 +20,7 @@ if( isset($_SESSION['user_id']) )
     {
 		if (filter_var($_POST['newemail'], FILTER_VALIDATE_EMAIL)) 
 		{
-		  $newemail = htmlspecialchars($_POST['newemail']);
+		  $newemail = htmlspecialchars($_POST['newemail'], ENT_QUOTES);
 		  $insertpseudo = $connect->prepare("UPDATE users SET email = ? WHERE id = ?");
 		  $insertpseudo->execute(array($newemail, $_SESSION['user_id']));
 		}
@@ -28,14 +28,14 @@ if( isset($_SESSION['user_id']) )
 	
 	if(isset($_POST['newphone']) AND !empty($_POST['newphone']) AND $_POST['newphone'] != $userinfo['phone']  AND check_csrf_token($_POST))
     {
-      $newphone = htmlspecialchars($_POST['newphone']);
+      $newphone = htmlspecialchars($_POST['newphone'], ENT_QUOTES);
       $insertpseudo = $connect->prepare("UPDATE users SET phone = ? WHERE id = ?");
       $insertpseudo->execute(array($newphone, $_SESSION['user_id']));
     }
 	
 	if(isset($_POST['newaddress']) AND !empty($_POST['newaddress']) AND $_POST['newaddress'] != $userinfo['address']  AND check_csrf_token($_POST))
     {
-      $newaddress = htmlspecialchars($_POST['newaddress']);
+      $newaddress = htmlspecialchars($_POST['newaddress'], ENT_QUOTES);
       $insertpseudo = $connect->prepare("UPDATE users SET address = ? WHERE id = ?");
       $insertpseudo->execute(array($newaddress, $_SESSION['user_id']));
     }
@@ -50,8 +50,8 @@ if( isset($_SESSION['user_id']) )
 	
 	if( isset($_POST['newpassword']) AND !empty($_POST['newpassword']) AND !empty($_POST['newpassword2'])  AND check_csrf_token($_POST))
     {
-      $newpassword = htmlspecialchars($_POST['newpassword']);
-	  $newpassword2 = htmlspecialchars($_POST['newpassword2']);
+      $newpassword = htmlspecialchars($_POST['newpassword'], ENT_QUOTES);
+	  $newpassword2 = htmlspecialchars($_POST['newpassword2'], ENT_QUOTES);
 	  if( $newpassword == $newpassword ){
 		  $user_encrypted_password = password_hash($newpassword, PASSWORD_BCRYPT);
 		  $insertpassword = $connect->prepare("UPDATE users SET password = ? WHERE id = ?");

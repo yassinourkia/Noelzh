@@ -50,9 +50,9 @@
 								$author = $r_author->fetch();
 								$date = $message['date'];
 							?>
-							<p><?=htmlspecialchars($author[0])?> - <?=htmlspecialchars($message['date'])?></p>
+							<p><?=htmlspecialchars($author[0], ENT_QUOTES)?> - <?=htmlspecialchars($message['date'], ENT_QUOTES)?></p>
 							<div> <!-- contenu message -->
-								<p><?=htmlspecialchars($message['message'])?></p>
+								<p><?=htmlspecialchars($message['message'], ENT_QUOTES)?></p>
 							</div>
 						</div>
 					<?php endforeach; ?>

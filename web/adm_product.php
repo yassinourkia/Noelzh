@@ -50,7 +50,7 @@ if (isset($_GET['mod_id'])) {
 		<?php foreach (get_raw_categories() as $group): ?>
 		<div class="form-check">
 			<input class="form-check-input" type="checkbox" name="group[]" value="<?=urlencode($group['name'])?>" <?php if (in_array($group['name'], $cat)) echo 'checked'?>></input>
-			<label class="form-check-label" for="group[]"><?=htmlspecialchars($group['name'])?></label>
+			<label class="form-check-label" for="group[]"><?=htmlspecialchars($group['name'], ENT_QUOTES)?></label>
 		</div>
 		<?php endforeach; ?>
 		<?php create_csrf_field(); ?>
