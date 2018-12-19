@@ -1,7 +1,7 @@
 <?php
 //register.php
 
-require '../connect.php';
+require_once '../connect.php';
 
 if(isset($_SESSION['id']))
 {

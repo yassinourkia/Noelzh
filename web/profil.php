@@ -1,5 +1,6 @@
 <?php
 require_once('header.php');
+require_once('../Login/register.php');
 require_once('csrf.php');
 
 if( isset($_SESSION['user_id']) )
@@ -48,11 +49,15 @@ if( isset($_SESSION['user_id']) )
     }
 	
 	
-	if( isset($_POST['newpassword']) AND !empty($_POST['newpassword']) AND !empty($_POST['newpassword2'])  AND check_csrf_token($_POST))
+	if( isset($_POST['newpassword']) AND !empty($_POST['newpassword']) AND !empty($_POST['newpassword2'])
+	 AND check_csrf_token($_POST))
     {
       $newpassword = htmlspecialchars($_POST['newpassword'], ENT_QUOTES);
-	  $newpassword2 = htmlspecialchars($_POST['newpassword2'], ENT_QUOTES);
-	  if( $newpassword == $newpassword ){
+		$newpassword2 = htmlspecialchars($_POST['newpassword2'], ENT_QUOTES);
+		if (!verify_password_complexity($newpassword)) {
+			die ("Le mot de passe n'est pas assez complexe !");
+		}
+	  if( $newpassword == $newpassword2 ){
 		  $user_encrypted_password = password_hash($newpassword, PASSWORD_BCRYPT);
 		  $insertpassword = $connect->prepare("UPDATE users SET password = ? WHERE id = ?");
 		  $insertpassword->execute(array($user_encrypted_password, $_SESSION['user_id']));
