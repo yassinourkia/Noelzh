@@ -53,7 +53,7 @@ function buy_panier() {
 			$r_product_qty_check->execute();
 			$qty = $r_product_qty_check->fetch()['quantity'];
 			if ($qty < 0) {
-				echo 'Le produit '.htmlspecialchars($p_product).' n\'est plus disponible en quantitée suffisante<br/>';
+				echo 'Le produit '.htmlspecialchars($p_product, ENT_QUOTES, "UTF-8").' n\'est plus disponible en quantitée suffisante<br/>';
 				echo 'Il en reste '.($p_qty + $qty).'<br/>';
 				$erreur = true;
 			}

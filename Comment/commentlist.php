@@ -22,7 +22,7 @@
 						echo '
 					</td>
 				</tr>
-				<tr class="active"><td> '.htmlspecialchars($row["text"], ENT_QUOTES).'</td></tr>';
+				<tr class="active"><td> '.htmlspecialchars($row["text"], ENT_QUOTES, "UTF-8").'</td></tr>';
 	}
 	echo '</table></div>' ;
 

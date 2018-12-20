@@ -12,7 +12,7 @@ if( isset($_SESSION['user_id']) )
 	
 	if(isset($_POST['newname']) AND !empty($_POST['newname']) AND $_POST['newname'] != $userinfo['name'] AND check_csrf_token($_POST))
     {
-      $newname = htmlspecialchars($_POST['newname'], ENT_QUOTES);
+      $newname = htmlspecialchars($_POST['newname'], ENT_QUOTES, "UTF-8");
       $insertpseudo = $connect->prepare("UPDATE users SET name = ? WHERE id = ?");
       $insertpseudo->execute(array($newname, $_SESSION['user_id']));
     }
@@ -21,7 +21,7 @@ if( isset($_SESSION['user_id']) )
     {
 		if (filter_var($_POST['newemail'], FILTER_VALIDATE_EMAIL)) 
 		{
-		  $newemail = htmlspecialchars($_POST['newemail'], ENT_QUOTES);
+		  $newemail = htmlspecialchars($_POST['newemail'], ENT_QUOTES, "UTF-8");
 		  $insertpseudo = $connect->prepare("UPDATE users SET email = ? WHERE id = ?");
 		  $insertpseudo->execute(array($newemail, $_SESSION['user_id']));
 		}
@@ -29,14 +29,14 @@ if( isset($_SESSION['user_id']) )
 	
 	if(isset($_POST['newphone']) AND !empty($_POST['newphone']) AND $_POST['newphone'] != $userinfo['phone']  AND check_csrf_token($_POST))
     {
-      $newphone = htmlspecialchars($_POST['newphone'], ENT_QUOTES);
+      $newphone = htmlspecialchars($_POST['newphone'], ENT_QUOTES, "UTF-8");
       $insertpseudo = $connect->prepare("UPDATE users SET phone = ? WHERE id = ?");
       $insertpseudo->execute(array($newphone, $_SESSION['user_id']));
     }
 	
 	if(isset($_POST['newaddress']) AND !empty($_POST['newaddress']) AND $_POST['newaddress'] != $userinfo['address']  AND check_csrf_token($_POST))
     {
-      $newaddress = htmlspecialchars($_POST['newaddress'], ENT_QUOTES);
+      $newaddress = htmlspecialchars($_POST['newaddress'], ENT_QUOTES, "UTF-8");
       $insertpseudo = $connect->prepare("UPDATE users SET address = ? WHERE id = ?");
       $insertpseudo->execute(array($newaddress, $_SESSION['user_id']));
     }
@@ -52,8 +52,8 @@ if( isset($_SESSION['user_id']) )
 	if( isset($_POST['newpassword']) AND !empty($_POST['newpassword']) AND !empty($_POST['newpassword2'])
 	 AND check_csrf_token($_POST))
     {
-      $newpassword = htmlspecialchars($_POST['newpassword'], ENT_QUOTES);
-		$newpassword2 = htmlspecialchars($_POST['newpassword2'], ENT_QUOTES);
+      $newpassword = htmlspecialchars($_POST['newpassword'], ENT_QUOTES, "UTF-8");
+		$newpassword2 = htmlspecialchars($_POST['newpassword2'], ENT_QUOTES, "UTF-8");
 		if (!verify_password_complexity($newpassword)) {
 			die ("Le mot de passe n'est pas assez complexe !");
 		}

@@ -48,9 +48,9 @@ require_once('../Products/products.php');
 				<div class="col-md-3 gallery-grid gallery-grid<?php if ($num > 0){ echo $num; }?> wow flipInY animated" data-wow-delay=".5s">
 					<a href="single.php?pid=<?=$p['id']?>"><img src="../Products/image.php?id=<?=urlencode($p['id'])?>" class="img-responsive"/></a>
 					<div class="gallery-text simpleCart_shelfItem">
-						<h5><a class="name" href="single.php?pid=<?=$p['id']?>"><?=htmlspecialchars($p['name'], ENT_QUOTES)?></a></h5>
-						<p><span class="item_price"><?=htmlspecialchars($p['price'], ENT_QUOTES)?> €</span></p>
-						<h4 class="sizes">Taille: <a href="#"><?=htmlspecialchars($p['size'], ENT_QUOTES)?></a> </h4>
+						<h5><a class="name" href="single.php?pid=<?=$p['id']?>"><?=htmlspecialchars($p['name'], ENT_QUOTES, "UTF-8")?></a></h5>
+						<p><span class="item_price"><?=htmlspecialchars($p['price'], ENT_QUOTES, "UTF-8")?> €</span></p>
+						<h4 class="sizes">Taille: <a href="#"><?=htmlspecialchars($p['size'], ENT_QUOTES, "UTF-8")?></a> </h4>
 						<ul>
 							<li><a href="#"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
 							<li><a class="item_add" href="#"><span class="glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>

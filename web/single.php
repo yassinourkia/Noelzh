@@ -11,7 +11,7 @@ if ($product != null):
 		<div class="container">
 			<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
 				<li><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Accueil</a></li>
-				<li class="active"><?=htmlspecialchars($product['name'], ENT_QUOTES)?></li>
+				<li class="active"><?=htmlspecialchars($product['name'], ENT_QUOTES, "UTF-8")?></li>
 			</ol>
 		</div>
 	</div>
@@ -30,7 +30,7 @@ if ($product != null):
 					</div>
 				</div>
 				<div class="col-md-6 single-top-left simpleCart_shelfItem wow fadeInRight animated" data-wow-delay=".5s">
-					<h3><?=htmlspecialchars($product['name'], ENT_QUOTES)?></h3>
+					<h3><?=htmlspecialchars($product['name'], ENT_QUOTES, "UTF-8")?></h3>
 					<div class="single-rating">
 						<?php
 							$avg = getAvgRating($product['id']);
@@ -39,11 +39,11 @@ if ($product != null):
 							}
 						?>
 					</div>
-					<h6 class="item_price"><?=htmlspecialchars($product['price'], ENT_QUOTES)?> €</h6>			
-					<p><?=htmlspecialchars($product['description'], ENT_QUOTES)?></p>
+					<h6 class="item_price"><?=htmlspecialchars($product['price'], ENT_QUOTES, "UTF-8")?> €</h6>			
+					<p><?=htmlspecialchars($product['description'], ENT_QUOTES, "UTF-8")?></p>
 					<ul class="size">
 						<h4>Taille</h4>
-						<li><a href="#"><?=htmlspecialchars($product['size'], ENT_QUOTES)?></a></li>
+						<li><a href="#"><?=htmlspecialchars($product['size'], ENT_QUOTES, "UTF-8")?></a></li>
 					</ul>
 					<div class="clearfix"> </div>
 					<form method="post" action="../Products/panier.php">
@@ -75,7 +75,7 @@ if ($product != null):
 						</div>
 						<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 							<div class="panel-body">
-								<?=htmlspecialchars($product['description'], ENT_QUOTES)?>
+								<?=htmlspecialchars($product['description'], ENT_QUOTES, "UTF-8")?>
 							</div>
 						</div>
 					</div>

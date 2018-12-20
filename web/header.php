@@ -154,12 +154,12 @@ $(window).load(function() {
 							
 							<?php foreach (get_header_categories() as $key => $group): ?>
 							<li class="dropdown grid">
-								<a href="#" class="dropdown-toggle list1" data-toggle="dropdown"><?=htmlspecialchars($key, ENT_QUOTES)?><b class="caret"></b></a>
+								<a href="#" class="dropdown-toggle list1" data-toggle="dropdown"><?=htmlspecialchars($key, ENT_QUOTES, "UTF-8")?><b class="caret"></b></a>
 								<ul class="dropdown-menu multi-column menu-two multi-column3">
 									<div class="row">
 										<div class="col-sm-4 menu-grids">
 											<ul class="multi-column-dropdown">
-												<li><a class="list" href="products.php?n=<?=urlencode($key)?>"><?=htmlspecialchars($key, ENT_QUOTES)?></a></li>
+												<li><a class="list" href="products.php?n=<?=urlencode($key)?>"><?=htmlspecialchars($key, ENT_QUOTES, "UTF-8")?></a></li>
 												<?php if ($admin): ?>
 												<form method="post"  action="../Products/groups.php">
 													<input type="hidden" name="nom_supprimer" value="<?=base64_encode($key)?>"/>
@@ -168,7 +168,7 @@ $(window).load(function() {
 												</form>
 												<?php endif; ?>
 												<?php foreach ($group as $sg): ?>
-												<li><a class="list" href="products.php?n=<?=urlencode($sg)?>"><?=htmlspecialchars($sg, ENT_QUOTES)?></a></li>
+												<li><a class="list" href="products.php?n=<?=urlencode($sg)?>"><?=htmlspecialchars($sg, ENT_QUOTES, "UTF-8")?></a></li>
 												<?php if ($admin): ?>
 												<form method="post" action="../Products/groups.php">
 													<input type="hidden" name="nom_supprimer" value="<?=base64_encode($key.'§'.$sg)?>"/>

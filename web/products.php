@@ -35,7 +35,7 @@ require_once('csrf.php');
 						</div>
 					</div>
 					<div class="new-bottom">
-						<h5><a class="name" href="single.php?pid=<?=$product['id']?>"><?=htmlspecialchars($product['name'], ENT_QUOTES)?></a></h5>
+						<h5><a class="name" href="single.php?pid=<?=$product['id']?>"><?=htmlspecialchars($product['name'], ENT_QUOTES, "UTF-8")?></a></h5>
 						<div class="rating">
 							<span class="on">☆</span>
 							<span class="on">☆</span>
@@ -44,8 +44,8 @@ require_once('csrf.php');
 							<span>☆</span>
 						</div>
 						<div class="ofr">
-							<p><span class="item_size"><?=htmlspecialchars($product['size'], ENT_QUOTES)?></span></p>
-							<p><span class="item_price"><?=htmlspecialchars($product['price'], ENT_QUOTES)?> €</span></p>
+							<p><span class="item_size"><?=htmlspecialchars($product['size'], ENT_QUOTES, "UTF-8")?></span></p>
+							<p><span class="item_price"><?=htmlspecialchars($product['price'], ENT_QUOTES, "UTF-8")?> €</span></p>
 							<?php if ($admin): ?>
 								<form method="post">
 									<input type="hidden" name="id_p_supprimer" value="<?=$product['id']?>"/>
